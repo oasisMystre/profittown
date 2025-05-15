@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: profittown
+    runtime: node
+    plan: starter
+    autoDeploy: true
+    buildCommand: bun install && bun run build
+    startCommand: bun migrate && bun dist/src/index.js
+    envVars:
+      - fromGroup: profittown/bot
+      - key: DATABASE_URL
+        fromDatabase:
+          name: profittown
+          property: connectionString
+databases:
+  - name: profittown
+    user: admin
+    plan: basic-256mb
