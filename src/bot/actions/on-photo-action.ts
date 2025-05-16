@@ -6,8 +6,11 @@ import { message } from "telegraf/filters";
 import { getEnv } from "../../env";
 import { db, rate } from "../../instances";
 import { cleanText, format } from "../../utils/format";
-import { getLastPaymentByUser } from "../../controllers/payments.controller";
 import { createSubscription } from "../../controllers/subscription.controller";
+import {
+  getLastPaymentByUser,
+  updatePaymentById,
+} from "../../controllers/payments.controller";
 
 export const onPhotoAction = (bot: Telegraf) => {
   bot.on(message("photo"), async (context) => {
@@ -27,6 +30,9 @@ export const onPhotoAction = (bot: Telegraf) => {
         });
 
         return Promise.all([
+          updatePaymentById(db, payment.id, {
+            proof: { receipt: photo.file_id },
+          }),
           context.telegram.sendPhoto(
             getEnv("SUPPORT"),
             Input.fromFileId(photo.file_id),

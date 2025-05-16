@@ -5,9 +5,12 @@ import { plans } from "./plans";
 import { payments } from "./payments";
 import { subscriptions } from "./subscriptions";
 
-export const userRelations = relations(users, ({ one, many }) => ({
+export const userRelations = relations(users, ({ many }) => ({
   payments: many(payments),
-  subscriptions: many(subscriptions),
+}));
+
+export const planRelations = relations(plans, ({ many }) => ({
+  payments: many(payments)
 }));
 
 export const paymentRelations = relations(payments, ({ one }) => ({

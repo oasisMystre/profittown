@@ -40,4 +40,11 @@ const seedPlans: Zod.infer<typeof insertPlanSchema>[] = [
 ];
 
 export const runSeedPlans = (db: Omit<Database, "$client">) =>
-  db.insert(plans).values(seedPlans).onConflictDoNothing().returning();
+  db
+    .insert(plans)
+    .values(seedPlans)
+    .onConflictDoUpdate({
+      target: [],
+      set: { name: plans.name, type: plans.type, price: plans.price },
+    })
+    .returning();

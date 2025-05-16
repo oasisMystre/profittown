@@ -1,1 +1,1 @@
-To Learn how to be profitable and to learn profittown trading strategy\.
+Ready to start flipping accounts the right way\? Learn Profittown\'s strategy and become a consistently profitable trader\.

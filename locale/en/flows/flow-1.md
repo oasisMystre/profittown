@@ -7,7 +7,7 @@ Terms \& Conditions\, VIP Signal
 \- Break\-even \& partials\.
 \- Our system is built for consistent growth, not hype\.
 \- No refunds after payment\.
-\- Complannts allowed only after 1 Month of usage\.
+\- Complaints allowed only after 1 Month of usage\.
 \- We trade step index only\.
 \- 3 to 5 quality signals weekly\.
 \- You'll be removed immediately after sub expiry\.
