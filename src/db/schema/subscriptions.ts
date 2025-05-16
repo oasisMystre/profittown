@@ -1,4 +1,11 @@
-import { pgTable, serial, timestamp, uuid } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  uuid,
+} from "drizzle-orm/pg-core";
 import { payments } from "./payments";
 
 export const subscriptions = pgTable("subscriptions", {
@@ -6,6 +13,10 @@ export const subscriptions = pgTable("subscriptions", {
   payment: serial()
     .references(() => payments.id, { onDelete: "cascade" })
     .notNull(),
-  expiresAt: timestamp().notNull(),
+  joined: boolean().default(false).notNull(),
+  status: text({ enum: ["pending", "active", "expired"] })
+    .default("pending")
+    .notNull(),
+  expiresAt: timestamp(),
   createdAt: timestamp().defaultNow().notNull(),
 });

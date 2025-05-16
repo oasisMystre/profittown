@@ -1,0 +1,1 @@
+💎 VIP group joined successfully\.

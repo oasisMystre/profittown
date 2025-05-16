@@ -10,7 +10,7 @@ const seedPlans: Zod.infer<typeof insertPlanSchema>[] = [
     recurring: "monthly",
   },
   {
-    name: "2 Months",
+    name: "3 Months",
     type: "subscription",
     price: { amount: 160, currency: "USD" },
     recurring: "quarterly",

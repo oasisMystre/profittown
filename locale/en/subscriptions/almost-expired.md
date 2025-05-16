@@ -1,0 +1,1 @@
+Your VIP subscription will expire in %date%\. Renew now to avoid removal\.

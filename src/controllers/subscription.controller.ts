@@ -1,10 +1,11 @@
-import { eq } from "drizzle-orm";
+import { and, desc, eq, getTableColumns } from "drizzle-orm";
 
-import { subscriptions } from "../db/schema";
+import { payments, subscriptions } from "../db/schema";
 import type { Database } from "../db";
 import type {
   insertSubscriptionSchema,
   selectSubscriptionSchema,
+  selectUserSchema,
 } from "../db/zod";
 
 export const createSubscription = (
@@ -28,4 +29,45 @@ export const updateSubscriptionById = (
     .set(value)
     .where(eq(subscriptions.id, id))
     .returning()
+    .execute();
+
+export const getSubscriptionById = (
+  db: Database,
+  id: Zod.infer<typeof selectSubscriptionSchema>["id"]
+) =>
+  db.query.subscriptions
+    .findFirst({
+      where: eq(subscriptions.id, id),
+      with: {
+        payment: {
+          with: {
+            plan: true,
+            user: true,
+          },
+          columns: {
+            plan: false,
+            user: false,
+          },
+        },
+      },
+      columns: {
+        payment: false,
+      },
+    })
+    .execute();
+
+export const getLastSubscriptionByUser = (
+  db: Database,
+  user: Zod.infer<typeof selectUserSchema>["id"]
+) =>
+  db
+    .select({ ...getTableColumns(subscriptions) })
+    .from(subscriptions)
+    .innerJoin(
+      payments,
+      and(eq(subscriptions.payment, payments.id), eq(payments.user, user))
+    )
+    .where(eq(subscriptions.status, "active"))
+    .orderBy(desc(subscriptions.createdAt))
+    .limit(1)
     .execute();

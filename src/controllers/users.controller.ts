@@ -4,16 +4,19 @@ import { users } from "../db/schema";
 import type { Database } from "../db";
 import type { insertUserSchema, selectUserSchema } from "../db/zod";
 
-export const createUser = (
+export const createUser = async (
   db: Database,
   value: Zod.infer<typeof insertUserSchema>
-) =>
-  db
+) => {
+  const [user] = await db
     .insert(users)
     .values(value)
     .returning()
     .onConflictDoUpdate({ target: users.id, set: value })
     .execute();
+
+  return user;
+};
 
 export const updateUserById = (
   db: Database,

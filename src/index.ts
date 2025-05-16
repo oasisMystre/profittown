@@ -1,10 +1,13 @@
 import "dotenv/config";
+import cron from "node-cron";
 import { Telegraf } from "telegraf";
 import fastify, { type FastifyInstance } from "fastify";
 
 import { getEnv } from "./env";
 import registerBot from "./bot";
+import { db } from "./instances";
 import { format } from "./utils/format";
+import { checkSubscriptions } from "./jobs/check-subscriptions";
 
 export const main = (bot: Telegraf) => {
   async function main(server: FastifyInstance, bot: Telegraf) {
@@ -27,6 +30,11 @@ export const main = (bot: Telegraf) => {
       server.listen({
         host: process.env.HOST ? process.env.HOST : "0.0.0.0",
         port: process.env.PORT ? Number(process.env.PORT!) : 10004,
+      }),
+      cron.schedule("0 */1 * * *", () => {
+        checkSubscriptions(db, bot).catch((error) => {
+          console.error(error);
+        });
       })
     );
 
