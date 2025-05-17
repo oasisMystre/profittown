@@ -19,7 +19,9 @@ export const main = (bot: Telegraf) => {
     if (process.env.RENDER_EXTERNAL_URL) {
       server.post(
         format("/telegraf/%", bot.secretPathComponent()),
-        (await bot.createWebhook({ domain: process.env.RENDER_EXTERNAL_URL })) as any
+        (await bot.createWebhook({
+          domain: process.env.RENDER_EXTERNAL_URL,
+        })) as any
       );
     } else
       promises.push(
