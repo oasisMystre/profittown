@@ -17,6 +17,7 @@ export const authenticateUser = async (
     });
 
     context.user = dbUser;
+    if (!context.session) context.session = {};
 
     return next();
   }

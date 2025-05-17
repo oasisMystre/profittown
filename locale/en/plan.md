@@ -1,9 +1,13 @@
-Pay for %plan% 
+*Pay for %plan%*
 
-Valid for %duration%
+*Recurring*
+`%duration%`
 
 *Amount* 
 `%amount%`
 
 *Local Currency*
 `%local_currency%`
+
+*Coupon*
+`%coupon%`

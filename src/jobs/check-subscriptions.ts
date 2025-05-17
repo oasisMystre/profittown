@@ -32,17 +32,17 @@ export const checkSubscriptions = async (db: Database, bot: Telegraf) => {
     .findMany({
       with: {
         payment: {
-          with: { user: true, plan: true },
-          columns: { user: false, plan: false },
+          with: { user: true, plan: true, coupon: true },
+          columns: { user: false, plan: false, coupon: false },
         },
       },
       columns: { payment: false },
-      where: or(
-        and(
-          eq(subscriptions.status, "active"),
-          eq(subscriptions.joined, false)
+      where: and(
+        or(
+          eq(subscriptions.joined, false),
+          gte(subscriptions.expiresAt, now.toDate())
         ),
-        gte(subscriptions.expiresAt, now.toDate())
+        eq(subscriptions.status, "active")
       ),
     })
     .execute();

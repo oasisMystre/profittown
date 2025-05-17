@@ -1,10 +1,12 @@
 import type { Context, Scenes } from "telegraf";
 
-import type { userSelectSchema } from "./db/zod";
+import type { selectCouponSchema, selectPlanSchema, userSelectSchema } from "./db/zod";
 import { createUser } from "./controllers/users.controller";
 
 type SessionData = {
-  id: string;
+  previousCommand?: string;
+  plan?: Zod.infer<typeof selectPlanSchema>,
+  coupon?: Zod.infer<typeof selectCouponSchema>;
 };
 
 type Session = SessionData;

@@ -1,0 +1,1 @@
+Invalid coupon code\. Please try again or type /skip to proceed without a coupon\.

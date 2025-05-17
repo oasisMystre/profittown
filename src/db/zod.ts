@@ -1,5 +1,5 @@
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
-import { payments, plans, subscriptions, users } from "./schema";
+import { coupons, payments, plans, subscriptions, users } from "./schema";
 
 export const selectUserSchema = createSelectSchema(users);
 export const insertUserSchema = createInsertSchema(users);
@@ -12,3 +12,5 @@ export const insertPaymentSchema = createInsertSchema(payments);
 
 export const selectSubscriptionSchema = createSelectSchema(subscriptions);
 export const insertSubscriptionSchema = createInsertSchema(subscriptions);
+
+export const selectCouponSchema = createSelectSchema(coupons);

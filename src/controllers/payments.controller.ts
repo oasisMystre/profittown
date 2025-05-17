@@ -1,9 +1,10 @@
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 
 import { payments } from "../db/schema";
 import type { Database } from "../db";
 import type {
   insertPaymentSchema,
+  selectCouponSchema,
   selectPaymentSchema,
   selectUserSchema,
 } from "../db/zod";
@@ -47,6 +48,31 @@ export const getLastPaymentByUser = (
         plan: true,
       },
       where: eq(payments.user, user),
+      orderBy: desc(payments.createdAt),
+    })
+    .execute();
+
+export const getPaymentWithCouponAndUser = (
+  db: Database,
+  coupon: Zod.infer<typeof selectCouponSchema>["id"],
+  user: Zod.infer<typeof selectUserSchema>["id"]
+) =>
+  db.query.payments
+    .findFirst({
+      with: {
+        plan: true,
+      },
+      columns: {
+        id: true,
+        status: true,
+        type: true,
+        plan: true,
+      },
+      where: and(
+        eq(payments.user, user),
+        eq(payments.coupon, coupon),
+        eq(payments.status, "successful")
+      ),
       orderBy: desc(payments.createdAt),
     })
     .execute();

@@ -1,0 +1,1 @@
+You are not eligible for this coupon\. You\'ve already used this coupon\.

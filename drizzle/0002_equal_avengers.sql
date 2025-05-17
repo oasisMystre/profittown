@@ -1,1 +1,0 @@
-ALTER TABLE "subscriptions" ADD COLUMN "joined" boolean DEFAULT false NOT NULL;

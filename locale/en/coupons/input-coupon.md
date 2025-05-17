@@ -1,0 +1,1 @@
+Great\! Please enter your coupon code below\.

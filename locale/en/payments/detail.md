@@ -14,3 +14,6 @@
 
 *Local Currency Amount*
 `%local_amount%`
+
+*Coupon*
+`%coupon%`

@@ -11,34 +11,52 @@ export const planAction = (bot: Telegraf) => {
       context.callbackQuery && "data" in context.callbackQuery
         ? context.callbackQuery.data
         : undefined;
+
     if (data) {
-      const [, id, previousCommand] = data.split(/_/);
+      const [newCommand, ...previousCommand] = data.split(/\|/g);
+      const [, id] = newCommand.split(/_/);
+
       const plan = await getPlansById(db, Number(id));
       const buttons = [];
 
       if (previousCommand)
-        buttons.push(Markup.button.callback("Go Back", previousCommand));
+        buttons.push(
+          Markup.button.callback("Go Back", previousCommand.join("|"))
+        );
       buttons.push(Markup.button.callback("Main Menu", "mainmenu"));
+
+      const { coupon } = await context.session;
 
       if (plan) {
         const intl = Intl.NumberFormat("en-US", {
           style: "currency",
           currency: plan.price.currency,
         });
+        const amount = coupon
+          ? plan.price.amount * Number(coupon.discount)
+          : plan?.price.amount;
+
         return context.editMessageText(
           readFileSync("locale/en/plan.md", "utf-8")
             .replace("%plan%", plan.name)
-            .replace("%amount%", cleanText(intl.format(plan.price.amount)))
+            .replace(
+              "%coupon%",
+              coupon
+                ? format(
+                    "%s Applied %s% Discount",
+                    coupon.code,
+                    Number(coupon.discount) * 100
+                  )
+                : "No coupon applied"
+            )
+            .replace("%amount%", cleanText(intl.format(amount)))
             .replace(
               "%duration%",
               cleanText(plan.recurring ? plan.recurring : "Lifetime")
             )
             .replace(
               "%local_currency%",
-              format(
-                "N%s",
-                cleanText((plan.price.amount * rate).toLocaleString())
-              )
+              format("N%s", cleanText((amount * rate).toLocaleString()))
             ),
           {
             parse_mode: "MarkdownV2",
@@ -48,8 +66,7 @@ export const planAction = (bot: Telegraf) => {
                   "USDT",
                   format("payment_%s_usdt|%s", id, data)
                 ),
-              ],
-              [
+
                 Markup.button.callback(
                   "BTC",
                   format("payment_%s_btc|%s", id, data)

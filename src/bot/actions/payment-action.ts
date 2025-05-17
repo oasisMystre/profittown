@@ -13,18 +13,16 @@ export const paymentAction = (bot: Telegraf) => {
       context.callbackQuery && "data" in context.callbackQuery
         ? context.callbackQuery.data
         : undefined;
-        console.log(data)
+
     if (data) {
-      const [newData, previousData] = data.split(/\|/g);
+      const [newData, ...previousData] = data.split(/\|/g);
       const [, planId, paymentType] = newData.split(/_|-/g);
-      console.log(newData, previousData);
-      console.log(planId, paymentType);
 
       const plan = await getPlansById(db, Number(planId));
 
       if (plan) {
         const button = Markup.inlineKeyboard([
-          Markup.button.callback("Go Back", previousData),
+          Markup.button.callback("Go Back", previousData.join("|")),
           Markup.button.callback("Main Menu", "mainmenu"),
         ]).reply_markup;
 
@@ -40,6 +38,7 @@ export const paymentAction = (bot: Telegraf) => {
               user: context.user.id,
               plan: plan.id,
               type: "usdt",
+              coupon: context.session.coupon?.id,
             }),
             context.editMessageText(
               readFileSync("locale/en/payments/usdt.md", "utf-8")
@@ -59,6 +58,7 @@ export const paymentAction = (bot: Telegraf) => {
               user: context.user.id,
               plan: plan.id,
               type: "btc",
+              coupon: context.session.coupon?.id,
             }),
             context.editMessageText(
               readFileSync("locale/en/payments/btc.md", "utf-8")
@@ -77,6 +77,7 @@ export const paymentAction = (bot: Telegraf) => {
               user: context.user.id,
               plan: plan.id,
               type: "naira",
+              coupon: context.session.coupon?.id,
             }),
             context.editMessageText(
               readFileSync("locale/en/payments/naira.md", "utf-8")

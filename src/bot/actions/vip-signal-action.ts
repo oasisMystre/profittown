@@ -29,7 +29,7 @@ export const vipSignalAction = (telegraf: Telegraf) => {
               });
               return Markup.button.callback(
                 format("%s - %s", plan.name, intl.format(plan.price.amount)),
-                format("plan_%s_%s", plan.id, 'vip-signal')
+                format("couponChoice_%s|%s", plan.id, "vip-signal")
               );
             }),
             2

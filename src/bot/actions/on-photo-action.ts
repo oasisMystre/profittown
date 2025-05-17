@@ -24,53 +24,63 @@ export const onPhotoAction = (bot: Telegraf) => {
           currency: payment.plan.price.currency,
         });
         const localAmount = payment.plan.price.amount * rate;
-        const [subscription] = await createSubscription(db, {
+        const subscription = await createSubscription(db, {
           payment: payment.id,
           status: "pending",
         });
-
-        return Promise.all([
-          updatePaymentById(db, payment.id, {
-            proof: { receipt: photo.file_id },
-          }),
-          context.telegram.sendPhoto(
-            getEnv("SUPPORT"),
-            Input.fromFileId(photo.file_id),
-            {
-              parse_mode: "MarkdownV2",
-              caption: readFileSync("locale/en/payments/detail.md", "utf-8")
-                .replace("%user_id%", cleanText(context.user.id))
-                .replace(
-                  "%subscription_id%",
-                  cleanText(String(subscription.id))
-                )
-                .replace("%payment_type%", cleanText(payment.type))
-                .replace(
-                  "%amount%",
-                  cleanText(intl.format(payment.plan.price.amount))
-                )
-                .replace(
-                  "%local_amount%",
-                  format("N%s", cleanText(localAmount.toLocaleString()))
-                ),
-              reply_markup: Markup.inlineKeyboard([
-                Markup.button.callback(
-                  "Approve",
-                  format("approve-%s", subscription.id)
-                ),
-              ]).reply_markup,
-            }
-          ),
-          context.replyWithMarkdownV2(
-            readFileSync(
-              "locale/en/payments/pending-payment.md",
-              "utf-8"
-            ).replace("%subscriptionId%", String(subscription.id)),
-            Markup.inlineKeyboard([
-              Markup.button.url("Contact Support", getEnv("SUPPORT_CONTACT")),
-            ])
-          ),
-        ]);
+        if (subscription)
+          return Promise.all([
+            updatePaymentById(db, payment.id, {
+              proof: { receipt: photo.file_id },
+            }),
+            context.telegram.sendPhoto(
+              getEnv("SUPPORT"),
+              Input.fromFileId(photo.file_id),
+              {
+                parse_mode: "MarkdownV2",
+                caption: readFileSync("locale/en/payments/detail.md", "utf-8")
+                  .replace("%user_id%", cleanText(context.user.id))
+                  .replace(
+                    "%coupon%",
+                    subscription.payment.coupon
+                      ? format(
+                          "%s applied %s% discount",
+                          subscription.payment.coupon.code,
+                          Number(subscription.payment.coupon.discount) * 100
+                        )
+                      : "No coupon applied"
+                  )
+                  .replace(
+                    "%subscription_id%",
+                    cleanText(String(subscription.id))
+                  )
+                  .replace("%payment_type%", cleanText(payment.type))
+                  .replace(
+                    "%amount%",
+                    cleanText(intl.format(payment.plan.price.amount))
+                  )
+                  .replace(
+                    "%local_amount%",
+                    format("N%s", cleanText(localAmount.toLocaleString()))
+                  ),
+                reply_markup: Markup.inlineKeyboard([
+                  Markup.button.callback(
+                    "Approve",
+                    format("approve-%s", subscription.id)
+                  ),
+                ]).reply_markup,
+              }
+            ),
+            context.replyWithMarkdownV2(
+              readFileSync(
+                "locale/en/payments/pending-payment.md",
+                "utf-8"
+              ).replace("%subscriptionId%", String(subscription.id)),
+              Markup.inlineKeyboard([
+                Markup.button.url("Contact Support", getEnv("SUPPORT_CONTACT")),
+              ])
+            ),
+          ]);
       }
     }
   });

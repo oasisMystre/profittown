@@ -1,0 +1,1 @@
+✅ Coupon applied successfully\! You\'ve unlocked a %percentage%\% discount\.

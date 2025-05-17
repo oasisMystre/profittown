@@ -8,16 +8,19 @@ import type {
   selectUserSchema,
 } from "../db/zod";
 
-export const createSubscription = (
+export const createSubscription = async (
   db: Database,
   value: Zod.infer<typeof insertSubscriptionSchema>
-) =>
-  db
+) => {
+  const [subscription] = await db
     .insert(subscriptions)
     .values(value)
     .returning()
     .onConflictDoUpdate({ target: subscriptions.id, set: value })
     .execute();
+
+  return getSubscriptionById(db, subscription.id);
+};
 
 export const updateSubscriptionById = (
   db: Database,
@@ -43,10 +46,12 @@ export const getSubscriptionById = (
           with: {
             plan: true,
             user: true,
+            coupon: true,
           },
           columns: {
             plan: false,
             user: false,
+            coupon: false,
           },
         },
       },

@@ -21,8 +21,6 @@ export const approvePaymentCommand = (telegraf: Telegraf) => {
         ? context.callbackQuery.data
         : undefined;
 
-      console.log(text);
-
     if (text) {
       const [, subscriptionId] = text.split(/\s|-/g);
       const subscription = await getSubscriptionById(
