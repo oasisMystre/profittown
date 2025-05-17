@@ -47,6 +47,8 @@ export const checkSubscriptions = async (db: Database, bot: Telegraf) => {
     })
     .execute();
 
+  console.log("[subscription.check] subscriptions=", unjoinedUsers.length);
+
   return Promise.allSettled(
     unjoinedUsers.flatMap(async (subscription) => {
       if (subscription.status === "active" && subscription.joined === false) {
