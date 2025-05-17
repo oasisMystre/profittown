@@ -44,7 +44,7 @@ export const runSeedPlans = (db: Omit<Database, "$client">) =>
     .insert(plans)
     .values(seedPlans)
     .onConflictDoUpdate({
-      target: [],
+      target: [plans.name, plans.price, plans.type],
       set: { name: plans.name, type: plans.type, price: plans.price },
     })
     .returning();
