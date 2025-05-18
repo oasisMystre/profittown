@@ -6,6 +6,7 @@ import { db, rate } from "../../instances";
 import { cleanText, format } from "../../utils/format";
 import { getPlansById } from "../../controllers/plan.controller";
 import { createPayment } from "../../controllers/payments.controller";
+import { insertPaymentSchema } from "../../db/zod";
 
 export const paymentAction = (bot: Telegraf) => {
   bot.action(/^payment/, async (context) => {
@@ -32,14 +33,17 @@ export const paymentAction = (bot: Telegraf) => {
         });
         const localAmount = rate * plan.price.amount;
 
+        const data: Zod.infer<typeof insertPaymentSchema> = {
+          user: context.user.id,
+          plan: plan.id,
+          type: paymentType as "usdt" | "btc" | "naira",
+        };
+
+        if (context.session.coupon) data.coupon = context.session.coupon.id;
+
         if (paymentType === "usdt") {
           return Promise.all([
-            createPayment(db, {
-              user: context.user.id,
-              plan: plan.id,
-              type: "usdt",
-              coupon: context.session.coupon?.id,
-            }),
+            createPayment(db, data),
             context.editMessageText(
               readFileSync("locale/en/payments/usdt.md", "utf-8")
                 .replace("%erc20%", getEnv("WALLET_USDT_ERC20"))
@@ -54,12 +58,7 @@ export const paymentAction = (bot: Telegraf) => {
           ]);
         } else if (paymentType === "btc") {
           return Promise.all([
-            createPayment(db, {
-              user: context.user.id,
-              plan: plan.id,
-              type: "btc",
-              coupon: context.session.coupon?.id,
-            }),
+            createPayment(db, data),
             context.editMessageText(
               readFileSync("locale/en/payments/btc.md", "utf-8")
                 .replace("%btc%", getEnv("WALLET_BTC"))
@@ -73,12 +72,7 @@ export const paymentAction = (bot: Telegraf) => {
           ]);
         } else if (paymentType === "naira") {
           return Promise.all([
-            createPayment(db, {
-              user: context.user.id,
-              plan: plan.id,
-              type: "naira",
-              coupon: context.session.coupon?.id,
-            }),
+            createPayment(db, data),
             context.editMessageText(
               readFileSync("locale/en/payments/naira.md", "utf-8")
                 .replace("%name%", getEnv("NAME"))

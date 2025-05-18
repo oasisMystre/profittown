@@ -1,4 +1,5 @@
 import {
+  integer,
   jsonb,
   pgTable,
   serial,
@@ -22,10 +23,10 @@ export const payments = pgTable(
       .references(() => users.id, { onDelete: "cascade" })
       .notNull(),
     proof: jsonb().$type<PaymentProof>(),
-    plan: serial()
+    plan: integer()
       .references(() => plans.id, { onDelete: "cascade" })
       .notNull(),
-    coupon: serial().references(() => coupons.id, { onDelete: "set null" }),
+    coupon: integer().references(() => coupons.id, { onDelete: "set null" }),
     type: text({ enum: ["usdt", "btc", "naira"] }).notNull(),
     status: text({ enum: ["pending", "processing", "successful"] })
       .default("pending")
@@ -34,7 +35,7 @@ export const payments = pgTable(
   },
   (column) => ({
     uniquePayment: unique()
-      .on(column.user, column.coupon, column.plan)
+      .on(column.user, column.coupon, column.plan, column.type, column.status)
       .nullsNotDistinct(),
   })
 );

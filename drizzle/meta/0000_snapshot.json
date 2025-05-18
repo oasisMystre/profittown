@@ -1,5 +1,5 @@
 {
-  "id": "5ec7cc42-90f5-47ea-a170-a04b85afa03c",
+  "id": "a89f79c3-cf5e-4ff6-9f32-169d68dada08",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -172,15 +172,15 @@
         },
         "plan": {
           "name": "plan",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
         "coupon": {
           "name": "coupon",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "type": {
           "name": "type",
@@ -247,13 +247,15 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "payments_user_coupon_plan_unique": {
-          "name": "payments_user_coupon_plan_unique",
+        "payments_user_coupon_plan_type_status_unique": {
+          "name": "payments_user_coupon_plan_type_status_unique",
           "nullsNotDistinct": true,
           "columns": [
             "user",
             "coupon",
-            "plan"
+            "plan",
+            "type",
+            "status"
           ]
         }
       },
@@ -273,7 +275,7 @@
         },
         "payment": {
           "name": "payment",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },

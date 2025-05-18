@@ -27,17 +27,17 @@ CREATE TABLE "payments" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user" text NOT NULL,
 	"proof" jsonb,
-	"plan" serial NOT NULL,
-	"coupon" serial NOT NULL,
+	"plan" integer NOT NULL,
+	"coupon" integer,
 	"type" text NOT NULL,
 	"status" text DEFAULT 'pending' NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "payments_user_coupon_plan_unique" UNIQUE NULLS NOT DISTINCT("user","coupon","plan")
+	CONSTRAINT "payments_user_coupon_plan_type_status_unique" UNIQUE NULLS NOT DISTINCT("user","coupon","plan","type","status")
 );
 --> statement-breakpoint
 CREATE TABLE "subscriptions" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"payment" serial NOT NULL,
+	"payment" integer NOT NULL,
 	"joined" boolean DEFAULT false NOT NULL,
 	"status" text DEFAULT 'pending' NOT NULL,
 	"expiresAt" timestamp,

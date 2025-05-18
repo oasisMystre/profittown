@@ -17,7 +17,16 @@ export const createPayment = (
     .insert(payments)
     .values(value)
     .returning()
-    .onConflictDoUpdate({ target: payments.id, set: value })
+    .onConflictDoUpdate({
+      target: [
+        payments.user,
+        payments.coupon,
+        payments.plan,
+        payments.type,
+        payments.status,
+      ],
+      set: value,
+    })
     .execute();
 
 export const updatePaymentById = (
