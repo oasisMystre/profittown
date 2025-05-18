@@ -1,6 +1,6 @@
 import moment from "moment";
 import { readFileSync } from "fs";
-import { and, eq, gte, or } from "drizzle-orm";
+import { and, eq, lte, or } from "drizzle-orm";
 import { Markup, TelegramError, type Telegraf } from "telegraf";
 
 import { getEnv } from "../env";
@@ -26,7 +26,7 @@ const onJoin = async (
 ];
 
 export const checkSubscriptions = async (db: Database, bot: Telegraf) => {
-  const now = moment().subtract(2, "days").add(4, "days");
+  const now = moment().add(2, "days");
 
   const unjoinedUsers = await db.query.subscriptions
     .findMany({
@@ -40,7 +40,7 @@ export const checkSubscriptions = async (db: Database, bot: Telegraf) => {
       where: and(
         or(
           eq(subscriptions.joined, false),
-          gte(subscriptions.expiresAt, now.toDate())
+          lte(subscriptions.expiresAt, now.toDate())
         ),
         eq(subscriptions.status, "active")
       ),
