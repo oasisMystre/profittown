@@ -4,7 +4,7 @@ import { Context, Markup, Telegraf, TelegramError } from "telegraf";
 
 import { getEnv } from "../../env";
 import { db, rate } from "../../instances";
-import { format } from "../../utils/format";
+import { cleanText, format } from "../../utils/format";
 import { updatePaymentById } from "../../controllers/payments.controller";
 import {
   getLastSubscriptionByUser,
@@ -91,25 +91,34 @@ export const approvePaymentCommand = (telegraf: Telegraf) => {
             subscription.payment.user.id,
             readFileSync("locale/en/subscriptions/successful.md", "utf-8")
               .replace(
+                "%subscriptionId%",
+                cleanText(subscription.id.toString())
+              )
+              .replace(
                 "%expires_at%",
                 expiresAt ? expiresAt.format("MMMM Do, YYYY") : "Lifetime"
               )
-              .replace("%plan_name%", subscription.payment.plan.name)
+              .replace("%plan_name%", cleanText(subscription.payment.plan.name))
               .replace(
                 "%amount%",
-                intl.format(subscription.payment.plan.price.amount)
+                cleanText(intl.format(subscription.payment.plan.price.amount))
               )
               .replace(
                 "%local_amount%",
-                format("N%s", localAmount.toLocaleString())
+                cleanText(format("N%s", localAmount.toLocaleString()))
               ),
             {
               parse_mode: "MarkdownV2",
               reply_markup: Markup.inlineKeyboard([
-                Markup.button.url(
-                  "Open Premium Group",
-                  getEnv("PREMIUM_CHANNEL_LINK")
-                ),
+                subscription.payment.plan.type === "one-off"
+                  ? Markup.button.url(
+                      "Contact Support",
+                      getEnv("SUPPORT_CONTACT")
+                    )
+                  : Markup.button.url(
+                      "Open Premium Group",
+                      getEnv("PREMIUM_CHANNEL_LINK")
+                    ),
               ]).reply_markup,
             }
           ),

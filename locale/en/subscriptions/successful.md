@@ -1,5 +1,8 @@
 *✅ Subscription activated\!*
 
+*Subscription Id*
+`%subscriptionId%`
+
 *Plan Name*
 `%plan_name%`
 
