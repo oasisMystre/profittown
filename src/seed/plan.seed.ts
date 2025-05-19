@@ -30,11 +30,13 @@ const seedPlans: Zod.infer<typeof insertPlanSchema>[] = [
   {
     name: "Group Mentorship",
     type: "one-off",
+    recurring: "quarterly",
     price: { amount: 250, currency: "USD" },
   },
   {
     name: "1 on 1",
     type: "one-off",
+    recurring: "semi-annually",
     price: { amount: 450, currency: "USD" },
   },
 ];
@@ -45,6 +47,6 @@ export const runSeedPlans = (db: Omit<Database, "$client">) =>
     .values(seedPlans)
     .onConflictDoUpdate({
       target: [plans.name, plans.price, plans.type],
-      set: { name: plans.name, type: plans.type, price: plans.price },
+      set: { name: plans.name, type: plans.type, price: plans.price, recurring: plans.recurring },
     })
     .returning();

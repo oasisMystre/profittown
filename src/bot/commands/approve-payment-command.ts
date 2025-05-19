@@ -47,7 +47,7 @@ export const approvePaymentCommand = (telegraf: Telegraf) => {
             case "monthly":
               return date.add(1, "month");
             case "quarterly":
-              return date.add(2, "month");
+              return date.add(3, "month");
             case "semi-annually":
               return date.add(6, "month");
             case "annually":
