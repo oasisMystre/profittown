@@ -1,3 +1,4 @@
+import type { z } from "zod";
 import { and, desc, eq } from "drizzle-orm";
 
 import { payments } from "../db/schema";
@@ -11,7 +12,7 @@ import type {
 
 export const createPayment = (
   db: Database,
-  value: Zod.infer<typeof insertPaymentSchema>
+  value: z.infer<typeof insertPaymentSchema>
 ) =>
   db
     .insert(payments)
@@ -31,8 +32,8 @@ export const createPayment = (
 
 export const updatePaymentById = (
   db: Database,
-  id: Zod.infer<typeof selectPaymentSchema>["id"],
-  value: Partial<Zod.infer<typeof insertPaymentSchema>>
+  id: z.infer<typeof selectPaymentSchema>["id"],
+  value: Partial<z.infer<typeof insertPaymentSchema>>
 ) =>
   db
     .update(payments)
@@ -43,7 +44,7 @@ export const updatePaymentById = (
 
 export const getLastPaymentByUser = (
   db: Database,
-  user: Zod.infer<typeof selectUserSchema>["id"]
+  user: z.infer<typeof selectUserSchema>["id"]
 ) =>
   db.query.payments
     .findFirst({
@@ -63,8 +64,8 @@ export const getLastPaymentByUser = (
 
 export const getPaymentWithCouponAndUser = (
   db: Database,
-  coupon: Zod.infer<typeof selectCouponSchema>["id"],
-  user: Zod.infer<typeof selectUserSchema>["id"]
+  coupon: z.infer<typeof selectCouponSchema>["id"],
+  user: z.infer<typeof selectUserSchema>["id"]
 ) =>
   db.query.payments
     .findFirst({

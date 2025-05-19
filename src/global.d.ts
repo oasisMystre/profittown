@@ -1,12 +1,17 @@
+import type { z } from "zod";
 import type { Context, Scenes } from "telegraf";
 
-import type { selectCouponSchema, selectPlanSchema, userSelectSchema } from "./db/zod";
+import type {
+  selectCouponSchema,
+  selectPlanSchema,
+  userSelectSchema,
+} from "./db/zod";
 import { createUser } from "./controllers/users.controller";
 
 type SessionData = {
   previousCommand?: string;
-  plan?: Zod.infer<typeof selectPlanSchema>,
-  coupon?: Zod.infer<typeof selectCouponSchema>;
+  plan?: z.infer<typeof selectPlanSchema>;
+  coupon?: z.infer<typeof selectCouponSchema>;
 };
 
 type Session = SessionData;
@@ -18,3 +23,10 @@ declare module "telegraf" {
     scene: Scenes.SceneContext["scene"];
   }
 }
+
+declare global {
+  const Zod: typeof z;
+}
+
+
+type X = Zod

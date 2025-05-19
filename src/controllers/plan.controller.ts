@@ -1,3 +1,5 @@
+import type { z } from "zod";
+
 import { and, eq, SQL } from "drizzle-orm";
 import { Database } from "../db";
 import { plans } from "../db/schema";
@@ -5,7 +7,7 @@ import { selectPlanSchema } from "../db/zod";
 
 export const getPlansByType = (
   db: Database,
-  type: Zod.infer<typeof selectPlanSchema>["type"],
+  type: z.infer<typeof selectPlanSchema>["type"],
   where?: SQL
 ) =>
   db.query.plans
@@ -16,7 +18,7 @@ export const getPlansByType = (
 
 export const getPlansById = (
   db: Database,
-  id: Zod.infer<typeof selectPlanSchema>["id"]
+  id: z.infer<typeof selectPlanSchema>["id"]
 ) =>
   db.query.plans
     .findFirst({

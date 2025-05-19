@@ -1,8 +1,10 @@
+import type { z } from "zod";
+
 import { plans } from "../db/schema";
 import type { Database } from "../db";
 import { insertPlanSchema } from "../db/zod";
 
-const seedPlans: Zod.infer<typeof insertPlanSchema>[] = [
+const seedPlans: z.infer<typeof insertPlanSchema>[] = [
   {
     name: "Monthly",
     type: "subscription",

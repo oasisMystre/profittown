@@ -1,3 +1,4 @@
+import type { z } from "zod";
 import { and, desc, eq, getTableColumns } from "drizzle-orm";
 
 import { payments, plans, subscriptions } from "../db/schema";
@@ -10,7 +11,7 @@ import type {
 
 export const createSubscription = async (
   db: Database,
-  value: Zod.infer<typeof insertSubscriptionSchema>
+  value: z.infer<typeof insertSubscriptionSchema>
 ) => {
   const [subscription] = await db
     .insert(subscriptions)
@@ -24,8 +25,8 @@ export const createSubscription = async (
 
 export const updateSubscriptionById = (
   db: Database,
-  id: Zod.infer<typeof selectSubscriptionSchema>["id"],
-  value: Partial<Zod.infer<typeof insertSubscriptionSchema>>
+  id: z.infer<typeof selectSubscriptionSchema>["id"],
+  value: Partial<z.infer<typeof insertSubscriptionSchema>>
 ) =>
   db
     .update(subscriptions)
@@ -36,7 +37,7 @@ export const updateSubscriptionById = (
 
 export const getSubscriptionById = (
   db: Database,
-  id: Zod.infer<typeof selectSubscriptionSchema>["id"]
+  id: z.infer<typeof selectSubscriptionSchema>["id"]
 ) =>
   db.query.subscriptions
     .findFirst({
@@ -63,7 +64,7 @@ export const getSubscriptionById = (
 
 export const getLastSubscriptionByUser = (
   db: Database,
-  user: Zod.infer<typeof selectUserSchema>["id"]
+  user: z.infer<typeof selectUserSchema>["id"]
 ) => {
   return db
     .select({

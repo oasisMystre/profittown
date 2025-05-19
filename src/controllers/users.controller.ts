@@ -1,3 +1,4 @@
+import type { z } from "zod";
 import { eq } from "drizzle-orm";
 
 import { users } from "../db/schema";
@@ -6,7 +7,7 @@ import type { insertUserSchema, selectUserSchema } from "../db/zod";
 
 export const createUser = async (
   db: Database,
-  value: Zod.infer<typeof insertUserSchema>
+  value: z.infer<typeof insertUserSchema>
 ) => {
   const [user] = await db
     .insert(users)
@@ -20,6 +21,6 @@ export const createUser = async (
 
 export const updateUserById = (
   db: Database,
-  id: Zod.infer<typeof selectUserSchema>["id"],
-  value: Partial<Zod.infer<typeof insertUserSchema>>
+  id: z.infer<typeof selectUserSchema>["id"],
+  value: Partial<z.infer<typeof insertUserSchema>>
 ) => db.update(users).set(value).where(eq(users.id, id)).returning().execute();

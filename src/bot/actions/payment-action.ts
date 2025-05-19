@@ -1,3 +1,4 @@
+import type { z } from "zod";
 import { readFileSync } from "fs";
 import { Markup, type Telegraf } from "telegraf";
 
@@ -33,7 +34,7 @@ export const paymentAction = (bot: Telegraf) => {
           style: "currency",
         });
 
-        const data: Zod.infer<typeof insertPaymentSchema> = {
+        const data: z.infer<typeof insertPaymentSchema> = {
           user: context.user.id,
           plan: plan.id,
           type: paymentType as "usdt" | "btc" | "naira",
