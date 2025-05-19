@@ -19,6 +19,7 @@ export const paymentAction = (bot: Telegraf) => {
       const [newData, ...previousData] = data.split(/\|/g);
       const [, planId, paymentType] = newData.split(/_|-/g);
 
+      const { coupon } = context.session;
       const plan = await getPlansById(db, Number(planId));
 
       if (plan) {
@@ -31,7 +32,6 @@ export const paymentAction = (bot: Telegraf) => {
           currency: plan.price.currency,
           style: "currency",
         });
-        const localAmount = rate * plan.price.amount;
 
         const data: Zod.infer<typeof insertPaymentSchema> = {
           user: context.user.id,
@@ -39,7 +39,12 @@ export const paymentAction = (bot: Telegraf) => {
           type: paymentType as "usdt" | "btc" | "naira",
         };
 
-        if (context.session.coupon) data.coupon = context.session.coupon.id;
+        if (coupon) data.coupon = coupon.id;
+        const amount = coupon
+          ? plan.price.amount * (1 - Number(coupon.discount))
+          : plan.price.amount;
+
+        const localAmount = rate * amount;
 
         if (paymentType === "usdt") {
           return Promise.all([
@@ -48,7 +53,7 @@ export const paymentAction = (bot: Telegraf) => {
               readFileSync("locale/en/payments/usdt.md", "utf-8")
                 .replace("%erc20%", getEnv("WALLET_USDT_ERC20"))
                 .replace("%trc20%", getEnv("WALLET_USDT_TRC20"))
-                .replace("%amount%", cleanText(intl.format(plan.price.amount)))
+                .replace("%amount%", cleanText(intl.format(amount)))
                 .replace(
                   "%local_amount%",
                   cleanText(format("N%s", localAmount.toLocaleString()))
@@ -62,7 +67,7 @@ export const paymentAction = (bot: Telegraf) => {
             context.editMessageText(
               readFileSync("locale/en/payments/btc.md", "utf-8")
                 .replace("%btc%", getEnv("WALLET_BTC"))
-                .replace("%amount%", cleanText(intl.format(plan.price.amount)))
+                .replace("%amount%", cleanText(intl.format(amount)))
                 .replace(
                   "%local_amount%",
                   cleanText(format("N%s", localAmount.toLocaleString()))
@@ -78,7 +83,7 @@ export const paymentAction = (bot: Telegraf) => {
                 .replace("%name%", getEnv("NAME"))
                 .replace("%account_number%", getEnv("ACC_NO"))
                 .replace("%bank_name%", getEnv("BANK_NAME"))
-                .replace("%amount%", cleanText(intl.format(plan.price.amount)))
+                .replace("%amount%", cleanText(intl.format(amount)))
                 .replace(
                   "%local_amount%",
                   cleanText(format("N%s", localAmount.toLocaleString()))

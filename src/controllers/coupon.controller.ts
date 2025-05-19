@@ -1,4 +1,4 @@
-import { and, eq, isNull, lte, or } from "drizzle-orm";
+import { and, eq, gte, isNull, or } from "drizzle-orm";
 
 import { Database } from "../db";
 import { coupons } from "../db/schema";
@@ -11,6 +11,6 @@ export const getCouponByCode = (
   db.query.coupons.findFirst({
     where: and(
       eq(coupons.code, code),
-      or(lte(coupons.expiresAt, new Date()), isNull(coupons.expiresAt))
+      or(gte(coupons.expiresAt, new Date()), isNull(coupons.expiresAt))
     ),
   });

@@ -33,7 +33,7 @@ export const planAction = (bot: Telegraf) => {
           currency: plan.price.currency,
         });
         const amount = coupon
-          ? plan.price.amount * Number(coupon.discount)
+          ? plan.price.amount * (1 - Number(coupon.discount))
           : plan?.price.amount;
 
         return context.editMessageText(
