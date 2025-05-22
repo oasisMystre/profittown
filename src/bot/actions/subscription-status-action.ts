@@ -4,11 +4,24 @@ import { Markup, Telegraf } from "telegraf";
 
 import { db } from "../../instances";
 import { getEnv } from "../../env";
-import { getLastSubscriptionByUser } from "../../controllers/subscription.controller";
+import { getLastSubscriptionByUserAndPlanType } from "../../controllers/subscription.controller";
 
 export const subscriptionStatusAction = (bot: Telegraf) => {
-  bot.action("subscription-status", async (context) => {
-    const [subscription] = await getLastSubscriptionByUser(db, context.user.id);
+  bot.action(/subscription-status/, async (context) => {
+    const data =
+      context.callbackQuery && "data" in context.callbackQuery
+        ? context.callbackQuery.data
+        : undefined;
+    let type: "subscription" | "one-off" | undefined;
+
+    if (data)
+      [, type] = data.split(/_/) as unknown as ("subscription" | "one-off")[];
+
+    const [subscription] = await getLastSubscriptionByUserAndPlanType(
+      db,
+      context.user.id,
+      type
+    );
     if (subscription)
       return context.editMessageText(
         readFileSync("locale/en/subscriptions/status.md", "utf-8")

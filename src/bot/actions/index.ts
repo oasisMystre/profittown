@@ -11,7 +11,6 @@ import { couponSceneAction } from "./coupon-scene-action";
 import { couponChoiceAction } from "./coupon-choice-action";
 import { howItWorksAction } from "./how-it-works-action";
 import { openTradeAccountAction } from "./open-trade-account-action";
-import { mentorshipDetailAction } from "./mentorship-detail-action";
 import { accountManagementAction } from "./account-management-action";
 import { subscriptionStatusAction } from "./subscription-status-action";
 
@@ -30,7 +29,6 @@ export const registerActions = (bot: Telegraf) => {
   couponChoiceAction(bot);
   couponSceneAction(bot);
   accountManagementAction(bot);
-  mentorshipDetailAction(bot);
   openTradeAccountAction(bot);
   subscriptionStatusAction(bot);
 };

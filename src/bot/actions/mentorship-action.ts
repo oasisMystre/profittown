@@ -1,4 +1,6 @@
+import { chunk } from "lodash";
 import { readFileSync } from "fs";
+
 import { Markup, type Telegraf } from "telegraf";
 import { getPlansByType } from "../../controllers/plan.controller";
 import { db } from "../../instances";
@@ -14,17 +16,27 @@ export const mentorshipAction = (telegraf: Telegraf) => {
         parse_mode: "MarkdownV2",
         reply_markup: Markup.inlineKeyboard([
           [
-            ...plans.map((plan) =>
-              Markup.button.callback(
-                plan.name,
-                format("mentorshipDetail-%s", plan.id)
-              )
+            Markup.button.callback(
+              "Check Subscription Status",
+              "subscription-status_oneoff"
             ),
           ],
+          ...chunk(
+            plans.map((plan) => {
+              const intl = Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: plan.price.currency,
+              });
+              return Markup.button.callback(
+                format("%s - %s", plan.name, intl.format(plan.price.amount)),
+                format("couponChoice_%s|%s", plan.id, "mentorship")
+              );
+            }),
+            1
+          ),
           [Markup.button.callback("Main Menu", "mainmenu")],
         ]).reply_markup,
       }
     );
   });
 };
-

@@ -8,7 +8,7 @@ export const startAction = (telegraf: Telegraf) => {
     ["☘️ Mentorship", "mentorship"],
     ["💼 Patnership", "open-trade-account"],
     ["🔑 Account Management", "account-management"],
-    ["🎁 Gift", "gift"],
+    ["🎁 Beginners Blueprint", "gift"],
     ["❓ FAQ", "faq"],
     ["📞 Contact Support", getEnv("SUPPORT_CONTACT"), "url"],
   ] as const;

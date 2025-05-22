@@ -1,11 +1,10 @@
-*🎁 Your Free Gift*
-Step Index Flip Blueprint
+*🎯 Beginners Blueprint*
+New to Step Index or just getting started with trading\? This section is built for you\.
 
-We don\'t just give signals\. We teach the strategy\. Here\'s a free PDF guide showing how we analyze Step Index using market structure\, Fibonacci levels\, and sniper entries\, the same method behind our signals\.
+We break down\,
+✅ Chart examples to guide you\.
+✅ How we approach sniper entries\.
+✅ Trading structure and key concepts\.
+✅ A full beginner\-friendly YouTube playlist\.
 
-What\'s inside?
-
-✅Step\-by\-step trading strategy\.
-✅Chart examples\.
-✅Key market concepts\.
-✅Exclusive profittown insights\.
+>Get the Beginners Blueprint\, a free PDF \& video playlist designed to teach you the basics\, step by step\.

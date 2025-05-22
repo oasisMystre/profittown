@@ -7,7 +7,7 @@ import { db, rate } from "../../instances";
 import { cleanText, format } from "../../utils/format";
 import { updatePaymentById } from "../../controllers/payments.controller";
 import {
-  getLastSubscriptionByUser,
+  getLastSubscriptionByUserAndPlanType,
   getSubscriptionById,
   updateSubscriptionById,
 } from "../../controllers/subscription.controller";
@@ -29,7 +29,7 @@ export const approvePaymentCommand = (telegraf: Telegraf) => {
       );
 
       if (subscription) {
-        const [lastSubscription] = await getLastSubscriptionByUser(
+        const [lastSubscription] = await getLastSubscriptionByUserAndPlanType(
           db,
           subscription.payment.user.id
         );

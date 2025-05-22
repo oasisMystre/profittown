@@ -18,7 +18,7 @@ export const vipSignalAction = (telegraf: Telegraf) => {
           [
             Markup.button.callback(
               "Check Subscription Status",
-              "subscription-status"
+              "subscription-status_subscription"
             ),
           ],
           ...chunk(

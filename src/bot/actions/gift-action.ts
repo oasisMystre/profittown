@@ -9,7 +9,13 @@ export const giftAction = (bot: Telegraf) => {
       {
         parse_mode: "MarkdownV2",
         reply_markup: Markup.inlineKeyboard([
-          [Markup.button.url("📥 Download", getEnv("GIFT_LINK"))],
+          [Markup.button.url("📥 Download the PDF", getEnv("GIFT_PDF_LINK"))],
+          [
+            Markup.button.url(
+              "▶️ Watch the Beginner Playlist",
+              getEnv("GIFT_YOUTUBE_LINK")
+            ),
+          ],
           [Markup.button.callback("Main Menu", "mainmenu")],
         ]).reply_markup,
       }

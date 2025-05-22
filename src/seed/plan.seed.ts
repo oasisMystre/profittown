@@ -30,16 +30,16 @@ const seedPlans: z.infer<typeof insertPlanSchema>[] = [
     recurring: "annually",
   },
   {
-    name: "Group Mentorship",
+    name: " 3 Months Mentorship + 6 Months Signals",
     type: "one-off",
     recurring: "quarterly",
-    price: { amount: 250, currency: "USD" },
+    price: { amount: 500, currency: "USD" },
   },
   {
-    name: "1 on 1",
+    name: "6 Months Mentorship + Lifetime Signals",
     type: "one-off",
     recurring: "semi-annually",
-    price: { amount: 450, currency: "USD" },
+    price: { amount: 750, currency: "USD" },
   },
 ];
 
@@ -49,6 +49,11 @@ export const runSeedPlans = (db: Omit<Database, "$client">) =>
     .values(seedPlans)
     .onConflictDoUpdate({
       target: [plans.name, plans.price, plans.type],
-      set: { name: plans.name, type: plans.type, price: plans.price, recurring: plans.recurring },
+      set: {
+        name: plans.name,
+        type: plans.type,
+        price: plans.price,
+        recurring: plans.recurring,
+      },
     })
     .returning();

@@ -38,14 +38,16 @@ export const planAction = (bot: Telegraf) => {
 
         return context.editMessageText(
           readFileSync("locale/en/plan.md", "utf-8")
-            .replace("%plan%", plan.name)
+            .replace("%plan%", cleanText(plan.name))
             .replace(
               "%coupon%",
               coupon
-                ? format(
-                    "%s Applied %s% Discount",
-                    coupon.code,
-                    Number(coupon.discount) * 100
+                ? cleanText(
+                    format(
+                      "%s Applied %s% Discount",
+                      coupon.code,
+                      Number(coupon.discount) * 100
+                    )
                   )
                 : "No coupon applied"
             )

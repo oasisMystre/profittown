@@ -5,6 +5,7 @@ import { payments, plans, subscriptions } from "../db/schema";
 import type { Database } from "../db";
 import type {
   insertSubscriptionSchema,
+  selectPlanSchema,
   selectSubscriptionSchema,
   selectUserSchema,
 } from "../db/zod";
@@ -62,9 +63,10 @@ export const getSubscriptionById = (
     })
     .execute();
 
-export const getLastSubscriptionByUser = (
+export const getLastSubscriptionByUserAndPlanType = (
   db: Database,
-  user: z.infer<typeof selectUserSchema>["id"]
+  user: z.infer<typeof selectUserSchema>["id"],
+  planType?: z.infer<typeof selectPlanSchema>["type"]
 ) => {
   return db
     .select({
@@ -77,7 +79,13 @@ export const getLastSubscriptionByUser = (
       payments,
       and(eq(subscriptions.payment, payments.id), eq(payments.user, user))
     )
-    .innerJoin(plans, eq(payments.plan, plans.id))
+    .innerJoin(
+      plans,
+      and(
+        eq(payments.plan, plans.id),
+        planType ? eq(plans.type, planType) : undefined
+      )
+    )
     .where(eq(subscriptions.status, "active"))
     .orderBy(desc(subscriptions.createdAt))
     .limit(1)
