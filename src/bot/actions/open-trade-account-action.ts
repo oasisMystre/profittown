@@ -13,6 +13,12 @@ export const openTradeAccountAction = (telegraf: Telegraf) => {
       {
         parse_mode: "MarkdownV2",
         reply_markup: Markup.inlineKeyboard([
+          [
+            Markup.button.url(
+              "＋ Create Your Trading Account",
+              getEnv("TRADE_ACCOUNT_LINK")
+            ),
+          ],
           [Markup.button.callback("Main Menu", "mainmenu")],
         ]).reply_markup,
       }

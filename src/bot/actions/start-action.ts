@@ -6,7 +6,7 @@ export const startAction = (telegraf: Telegraf) => {
   const mainMenu = [
     ["⚡️ VIP Signal", "vip-signal"],
     ["☘️ Mentorship", "mentorship"],
-    ["💼 Patnership", "open-trade-account"],
+    ["＋ Create Account", "open-trade-account"],
     ["🔑 Account Management", "account-management"],
     ["🎁 Beginners Blueprint", "gift"],
     ["❓ FAQ", "faq"],
