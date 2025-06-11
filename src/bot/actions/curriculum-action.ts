@@ -3,7 +3,7 @@ import { Markup, type Telegraf } from "telegraf";
 
 export const curriculumAction = (bot: Telegraf) => {
   bot.action("curriculum", (context) => {
-    return context.replyWithMarkdownV2(
+    return context.editMessageText(
       readFileSync("locale/en/curriculum.md", "utf-8"),
       Markup.inlineKeyboard([
         [
