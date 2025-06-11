@@ -34,6 +34,7 @@ export const mentorshipAction = (telegraf: Telegraf) => {
             }),
             1
           ),
+          [Markup.button.callback("📚 Mentorship Curriculum", "curriculum")],
           [Markup.button.callback("Main Menu", "mainmenu")],
         ]).reply_markup,
       }
