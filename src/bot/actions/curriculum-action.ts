@@ -5,18 +5,21 @@ export const curriculumAction = (bot: Telegraf) => {
   bot.action("curriculum", (context) => {
     return context.editMessageText(
       readFileSync("locale/en/curriculum.md", "utf-8"),
-      Markup.inlineKeyboard([
-        [
-          Markup.button.callback(
-            "📥 Dowload Curriculum",
-            "download_curriculum"
-          ),
-        ],
-        [
-          Markup.button.callback("Go Back", "mentorship"),
-          Markup.button.callback("Main Menu", "mainmenu"),
-        ],
-      ])
+      {
+        parse_mode: "MarkdownV2",
+        reply_markup: Markup.inlineKeyboard([
+          [
+            Markup.button.callback(
+              "📥 Dowload Curriculum",
+              "download_curriculum"
+            ),
+          ],
+          [
+            Markup.button.callback("Go Back", "mentorship"),
+            Markup.button.callback("Main Menu", "mainmenu"),
+          ],
+        ]).reply_markup,
+      }
     );
   });
 };
