@@ -13,6 +13,8 @@ import { howItWorksAction } from "./how-it-works-action";
 import { openTradeAccountAction } from "./open-trade-account-action";
 import { accountManagementAction } from "./account-management-action";
 import { subscriptionStatusAction } from "./subscription-status-action";
+import { curriculumAction } from "./curriculum-action";
+import { downloadCurriculumAction } from "./download-curriculum-action";
 
 
 
@@ -20,6 +22,8 @@ export const registerActions = (bot: Telegraf) => {
   faqAction(bot);
   planAction(bot);
   giftAction(bot);
+  curriculumAction(bot);
+  downloadCurriculumAction(bot);
   paymentAction(bot);
   startAction(bot);
   onPhotoAction(bot);
