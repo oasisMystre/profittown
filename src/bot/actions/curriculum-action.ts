@@ -12,7 +12,10 @@ export const curriculumAction = (bot: Telegraf) => {
             "download_curriculum"
           ),
         ],
-        [Markup.button.callback("Main Menu", "mainmenu")],
+        [
+          Markup.button.callback("Go Back", "mentorship"),
+          Markup.button.callback("Main Menu", "mainmenu"),
+        ],
       ])
     );
   });
