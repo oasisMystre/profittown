@@ -4,7 +4,7 @@ Passive growth\. Zero stress\. Full transparency\.
 We help serious traders grow their capital while managing risk strictly\. You keep your account\, we trade it\.
 
 Key Details\,
-\- Minimum capital is $10\,000\.
+\- Minimum capital is $2\,000\.
 \- Profit split is 50% you \/ 50% Profittown\.
 \- Broker is Deriv\.
 \- Max risk cap is 30\% per cycle\.
