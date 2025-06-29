@@ -67,6 +67,7 @@ export const checkSubscriptions = async (db: Database, bot: Telegraf) => {
           });
       } else if (moment().isSameOrAfter(subscription.expiresAt)) {
         return Promise.all([
+          updateSubscriptionById(db, subscription.id, { status: "expired" }),
           bot.telegram.sendMessage(
             subscription.payment.user.id,
             readFileSync("locale/en/subscriptions/expired.md", "utf-8"),
