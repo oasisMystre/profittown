@@ -70,6 +70,14 @@ export const approvePaymentCommand = (telegraf: Telegraf) => {
               getEnv("PREMIUM_CHANNEL"),
               Number(subscription.payment.user.id)
             )
+            .then(() =>
+              context.telegram
+                .approveChatJoinRequest(
+                  getEnv("PREMIUM_CHANNEL"),
+                  Number(subscription.payment.user.id)
+                )
+                .catch(() => null)
+            )
             .catch(() => null),
           context.telegram
             .approveChatJoinRequest(
