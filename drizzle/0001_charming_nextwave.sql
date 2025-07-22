@@ -1,0 +1,1 @@
+ALTER TABLE "payments" DROP CONSTRAINT "payments_user_coupon_plan_type_status_unique";

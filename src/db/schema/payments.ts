@@ -5,7 +5,7 @@ import {
   serial,
   text,
   timestamp,
-  unique,
+  // unique,
 } from "drizzle-orm/pg-core";
 import { users } from "./users";
 import { plans } from "./plans";
@@ -33,9 +33,9 @@ export const payments = pgTable(
       .notNull(),
     createdAt: timestamp().defaultNow().notNull(),
   },
-  (column) => ({
-    uniquePayment: unique()
-      .on(column.user, column.coupon, column.plan, column.type, column.status)
-      .nullsNotDistinct(),
-  })
+  // (column) => ({
+  //   uniquePayment: unique()
+  //     .on(column.user, column.coupon, column.plan, column.type, column.status)
+  //     .nullsNotDistinct(),
+  // })
 );

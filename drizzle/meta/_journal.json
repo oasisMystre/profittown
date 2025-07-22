@@ -8,6 +8,13 @@
       "when": 1747605157495,
       "tag": "0000_silent_pestilence",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1753202341997,
+      "tag": "0001_charming_nextwave",
+      "breakpoints": true
     }
   ]
 }
