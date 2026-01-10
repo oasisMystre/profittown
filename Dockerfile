@@ -9,6 +9,6 @@ ENV PATH="/root/.bun/bin:$PATH"
 RUN apt-get update \
   && apt-get install -y curl unzip bash ca-certificates
 
-COPY server .
+COPY . .
 RUN bun install && bun run migrate
 CMD bun src/index.ts
