@@ -1,25 +1,11 @@
 version: "3.8"
 services:
-  postgres:
-    image: postgres:15
-    container_name: postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: profittown
-      POSTGRES_DB: profittown
-      POSTGRES_PASSWORD: default
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
   profittown:
     build: .
     container_name: profittown
-    depends_on:
-      - postgres 
     env_file: .env 
     environment:
-      APP_DATABASE_URL: postgres://profittown:default@postgres:5432/profittown
+      APP_DATABASE_URL: postgres://bifrost:default@postgres:5432/profittown
     ports:
       - "8000:8000"
     restart: unless-stopped 
