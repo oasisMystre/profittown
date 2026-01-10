@@ -19,7 +19,7 @@ export const planAction = (bot: Telegraf) => {
       const buttons = [];
       const extra = [];
 
-      if (plan.paymentLink)
+      if (plan?.paymentLink)
         extra.push([Markup.button.url("Pay with paystack", plan.paymentLink)]);
       if (previousCommand)
         buttons.push(

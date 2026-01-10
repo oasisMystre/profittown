@@ -6,12 +6,12 @@ export const selectUserSchema = createSelectSchema(users);
 export const insertUserSchema = createInsertSchema(users);
 
 export const selectPlanSchema = createSelectSchema(plans);
-export const insertPlanSchema = createInsertSchema(plans);
+export const insertPlanSchema = createInsertSchema(plans, {
+  paymentLink: z.string().url().optional().nullable(),
+});
 
 export const selectPaymentSchema = createSelectSchema(payments);
-export const insertPaymentSchema = createInsertSchema(payments, {
-  paymentLink: z.url().optional().nullable(),
-});
+export const insertPaymentSchema = createInsertSchema(payments);
 
 export const selectSubscriptionSchema = createSelectSchema(subscriptions);
 export const insertSubscriptionSchema = createInsertSchema(subscriptions);
