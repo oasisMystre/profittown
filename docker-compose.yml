@@ -4,8 +4,6 @@ services:
     build: .
     container_name: profittown
     env_file: .env 
-    environment:
-      APP_DATABASE_URL: postgresql://bifrost:default@159.195.71.78:5432/profittown
     ports:
       - "8000:8000"
     restart: unless-stopped 
