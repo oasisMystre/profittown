@@ -10,5 +10,5 @@ RUN apt-get update \
   && apt-get install -y curl unzip bash ca-certificates
 
 COPY . .
-RUN bun install && bun run migrate
+RUN bun install
 CMD bun src/index.ts
