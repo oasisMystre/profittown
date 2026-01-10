@@ -5,7 +5,7 @@ services:
     container_name: profittown
     env_file: .env 
     environment:
-      APP_DATABASE_URL: postgres://bifrost:default@postgres:5432/profittown
+      APP_DATABASE_URL: postgresql://bifrost:default@postgres:5432/profittown
     ports:
       - "8000:8000"
     restart: unless-stopped 
