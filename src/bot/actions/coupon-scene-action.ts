@@ -1,4 +1,4 @@
-import { Telegraf } from "telegraf";
+import type { Telegraf } from "telegraf";
 
 import { db } from "../../instances";
 import { couponSceneId } from "../scenes/coupon-scene";

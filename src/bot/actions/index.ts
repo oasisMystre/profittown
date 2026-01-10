@@ -16,8 +16,6 @@ import { subscriptionStatusAction } from "./subscription-status-action";
 import { curriculumAction } from "./curriculum-action";
 import { downloadCurriculumAction } from "./download-curriculum-action";
 
-
-
 export const registerActions = (bot: Telegraf) => {
   faqAction(bot);
   planAction(bot);

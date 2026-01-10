@@ -12,7 +12,7 @@ import type {
 
 export const createPayment = (
   db: Database,
-  value: z.infer<typeof insertPaymentSchema>
+  value: z.infer<typeof insertPaymentSchema>,
 ) =>
   db
     .insert(payments)
@@ -33,7 +33,7 @@ export const createPayment = (
 export const updatePaymentById = (
   db: Database,
   id: z.infer<typeof selectPaymentSchema>["id"],
-  value: Partial<z.infer<typeof insertPaymentSchema>>
+  value: Partial<z.infer<typeof insertPaymentSchema>>,
 ) =>
   db
     .update(payments)
@@ -44,7 +44,7 @@ export const updatePaymentById = (
 
 export const getLastPaymentByUser = (
   db: Database,
-  user: z.infer<typeof selectUserSchema>["id"]
+  user: z.infer<typeof selectUserSchema>["id"],
 ) =>
   db.query.payments
     .findFirst({
@@ -65,7 +65,7 @@ export const getLastPaymentByUser = (
 export const getPaymentWithCouponAndUser = (
   db: Database,
   coupon: z.infer<typeof selectCouponSchema>["id"],
-  user: z.infer<typeof selectUserSchema>["id"]
+  user: z.infer<typeof selectUserSchema>["id"],
 ) =>
   db.query.payments
     .findFirst({
@@ -81,7 +81,7 @@ export const getPaymentWithCouponAndUser = (
       where: and(
         eq(payments.user, user),
         eq(payments.coupon, coupon),
-        eq(payments.status, "successful")
+        eq(payments.status, "successful"),
       ),
       orderBy: desc(payments.createdAt),
     })

@@ -13,12 +13,12 @@ export const giftAction = (bot: Telegraf) => {
           [
             Markup.button.url(
               "▶️ Watch the Beginner Playlist",
-              getEnv("GIFT_YOUTUBE_LINK")
+              getEnv("GIFT_YOUTUBE_LINK"),
             ),
           ],
           [Markup.button.callback("Main Menu", "mainmenu")],
         ]).reply_markup,
-      }
+      },
     );
   });
 };

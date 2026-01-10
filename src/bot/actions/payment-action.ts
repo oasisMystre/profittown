@@ -4,7 +4,7 @@ import { Markup, type Telegraf } from "telegraf";
 
 import { getEnv } from "../../env";
 import { db, rate } from "../../instances";
-import { insertPaymentSchema } from "../../db/zod";
+import type { insertPaymentSchema } from "../../db/zod";
 import { cleanText, format } from "../../utils/format";
 import { getPlansById } from "../../controllers/plan.controller";
 import { createPayment } from "../../controllers/payments.controller";
@@ -57,9 +57,9 @@ export const paymentAction = (bot: Telegraf) => {
                 .replace("%amount%", cleanText(intl.format(amount)))
                 .replace(
                   "%local_amount%",
-                  cleanText(format("N%s", localAmount.toLocaleString()))
+                  cleanText(format("N%s", localAmount.toLocaleString())),
                 ),
-              { parse_mode: "MarkdownV2", reply_markup: button }
+              { parse_mode: "MarkdownV2", reply_markup: button },
             ),
           ]);
         } else if (paymentType === "btc") {
@@ -71,9 +71,9 @@ export const paymentAction = (bot: Telegraf) => {
                 .replace("%amount%", cleanText(intl.format(amount)))
                 .replace(
                   "%local_amount%",
-                  cleanText(format("N%s", localAmount.toLocaleString()))
+                  cleanText(format("N%s", localAmount.toLocaleString())),
                 ),
-              { parse_mode: "MarkdownV2", reply_markup: button }
+              { parse_mode: "MarkdownV2", reply_markup: button },
             ),
           ]);
         } else if (paymentType === "naira") {
@@ -87,9 +87,9 @@ export const paymentAction = (bot: Telegraf) => {
                 .replace("%amount%", cleanText(intl.format(amount)))
                 .replace(
                   "%local_amount%",
-                  cleanText(format("N%s", localAmount.toLocaleString()))
+                  cleanText(format("N%s", localAmount.toLocaleString())),
                 ),
-              { parse_mode: "MarkdownV2", reply_markup: button }
+              { parse_mode: "MarkdownV2", reply_markup: button },
             ),
           ]);
         }

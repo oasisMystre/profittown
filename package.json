@@ -6,9 +6,11 @@
     "build": "tsc",
     "codegen": "bun scripts/codegen",
     "dev": "bun codegen && bun run src/index.ts --watch",
-    "migrate": "drizzle-kit generate && drizzle-kit migrate"
+    "migrate": "drizzle-kit generate && drizzle-kit migrate",
+    "lint": "bun x biome format --write && bun x biome lint --fix && biome check ."
   },
   "devDependencies": {
+    "@biomejs/biome": "2.2.4",
     "@types/bun": "latest",
     "@types/lodash": "^4.17.16",
     "@types/node-cron": "^3.0.11",

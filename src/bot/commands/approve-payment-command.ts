@@ -1,6 +1,6 @@
 import moment from "moment";
 import { readFileSync } from "fs";
-import { Context, Markup, Telegraf, TelegramError } from "telegraf";
+import { type Context, Markup, type Telegraf, TelegramError } from "telegraf";
 
 import { getEnv } from "../../env";
 import { db, rate } from "../../instances";
@@ -18,20 +18,20 @@ export const approvePaymentCommand = (telegraf: Telegraf) => {
       context.message && "text" in context.message
         ? context.message.text
         : context.callbackQuery && "data" in context.callbackQuery
-        ? context.callbackQuery.data
-        : undefined;
+          ? context.callbackQuery.data
+          : undefined;
 
     if (text) {
       const [, subscriptionId] = text.split(/\s|-/g);
       const subscription = await getSubscriptionById(
         db,
-        Number(subscriptionId)
+        Number(subscriptionId),
       );
 
       if (subscription) {
         const [lastSubscription] = await getLastSubscriptionByUserAndPlanType(
           db,
-          subscription.payment.user.id
+          subscription.payment.user.id,
         );
 
         const intl = Intl.NumberFormat("en-US", {
@@ -68,21 +68,21 @@ export const approvePaymentCommand = (telegraf: Telegraf) => {
           await context.telegram
             .unbanChatMember(
               getEnv("PREMIUM_CHANNEL"),
-              Number(subscription.payment.user.id)
+              Number(subscription.payment.user.id),
             )
             .then(() =>
               context.telegram
                 .approveChatJoinRequest(
                   getEnv("PREMIUM_CHANNEL"),
-                  Number(subscription.payment.user.id)
+                  Number(subscription.payment.user.id),
                 )
-                .catch(() => null)
+                .catch(() => null),
             )
             .catch(() => null),
           context.telegram
             .approveChatJoinRequest(
               getEnv("PREMIUM_CHANNEL"),
-              Number(subscription.payment.user.id)
+              Number(subscription.payment.user.id),
             )
             .then(() => null)
             .catch((error) => {
@@ -93,27 +93,27 @@ export const approvePaymentCommand = (telegraf: Telegraf) => {
               return null;
             }),
           context.replyWithMarkdownV2(
-            readFileSync("locale/en/payments/successful.md", "utf-8")
+            readFileSync("locale/en/payments/successful.md", "utf-8"),
           ),
           context.telegram.sendMessage(
             subscription.payment.user.id,
             readFileSync("locale/en/subscriptions/successful.md", "utf-8")
               .replace(
                 "%subscriptionId%",
-                cleanText(subscription.id.toString())
+                cleanText(subscription.id.toString()),
               )
               .replace(
                 "%expires_at%",
-                expiresAt ? expiresAt.format("MMMM Do, YYYY") : "Lifetime"
+                expiresAt ? expiresAt.format("MMMM Do, YYYY") : "Lifetime",
               )
               .replace("%plan_name%", cleanText(subscription.payment.plan.name))
               .replace(
                 "%amount%",
-                cleanText(intl.format(subscription.payment.plan.price.amount))
+                cleanText(intl.format(subscription.payment.plan.price.amount)),
               )
               .replace(
                 "%local_amount%",
-                cleanText(format("N%s", localAmount.toLocaleString()))
+                cleanText(format("N%s", localAmount.toLocaleString())),
               ),
             {
               parse_mode: "MarkdownV2",
@@ -121,14 +121,14 @@ export const approvePaymentCommand = (telegraf: Telegraf) => {
                 subscription.payment.plan.type === "one-off"
                   ? Markup.button.url(
                       "Contact Support",
-                      getEnv("SUPPORT_CONTACT")
+                      getEnv("SUPPORT_CONTACT"),
                     )
                   : Markup.button.url(
                       "Open Premium Group",
-                      getEnv("PREMIUM_CHANNEL_LINK")
+                      getEnv("PREMIUM_CHANNEL_LINK"),
                     ),
               ]).reply_markup,
-            }
+            },
           ),
         ]);
       }

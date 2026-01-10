@@ -10,7 +10,7 @@ export const faqAction = (telegraf: Telegraf) => {
         reply_markup: Markup.inlineKeyboard([
           Markup.button.callback("Main Menu", "mainmenu"),
         ]).reply_markup,
-      }
-    )
+      },
+    ),
   );
 };

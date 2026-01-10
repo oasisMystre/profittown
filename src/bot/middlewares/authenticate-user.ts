@@ -6,7 +6,7 @@ import { createUser } from "../../controllers/users.controller";
 
 export const authenticateUser = async (
   context: Context,
-  next: () => Promise<void>
+  next: () => Promise<void>,
 ) => {
   const user = context.from;
   if (user) {

@@ -14,9 +14,9 @@ export const couponScene = new Scenes.WizardScene(
   async (context) => {
     await context.replyWithMarkdownV2(
       readFileSync("locale/en/coupons/input-coupon.md", "utf-8"),
-      Markup.forceReply()
+      Markup.forceReply(),
     );
-  }
+  },
 );
 
 couponScene.command("skip", (context) => context.scene.leave());
@@ -32,18 +32,18 @@ couponScene.use(authenticateUser).on(message("text"), async (context) => {
       const payment = await getPaymentWithCouponAndUser(
         db,
         coupon.id,
-        context.user.id
+        context.user.id,
       );
       if (payment)
         return context.replyWithMarkdownV2(
-          readFileSync("locale/en/coupons/already-used.md", "utf-8")
+          readFileSync("locale/en/coupons/already-used.md", "utf-8"),
         );
 
       context.session.coupon = coupon;
       await context.replyWithMarkdownV2(
         readFileSync("locale/en/coupons/coupon-applied.md", "utf-8").replace(
           "%percentage%",
-          (parseFloat(coupon.discount) * 100).toString()
+          (parseFloat(coupon.discount) * 100).toString(),
         ),
         Markup.inlineKeyboard([
           Markup.button.callback(
@@ -53,17 +53,17 @@ couponScene.use(authenticateUser).on(message("text"), async (context) => {
               context.session.plan!.id,
               context.session.previousCommand
                 ? context.session.previousCommand
-                : "mainmenu"
-            )
+                : "mainmenu",
+            ),
           ),
-        ])
+        ]),
       );
       return context.scene.leave();
     }
 
     return context.replyWithMarkdownV2(
       readFileSync("locale/en/coupons/invalid-coupon.md", "utf-8"),
-      Markup.forceReply()
+      Markup.forceReply(),
     );
   }
 });

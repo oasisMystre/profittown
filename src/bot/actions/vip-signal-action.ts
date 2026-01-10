@@ -18,7 +18,7 @@ export const vipSignalAction = (telegraf: Telegraf) => {
           [
             Markup.button.callback(
               "Check Subscription Status",
-              "subscription-status_subscription"
+              "subscription-status_subscription",
             ),
           ],
           ...chunk(
@@ -29,14 +29,14 @@ export const vipSignalAction = (telegraf: Telegraf) => {
               });
               return Markup.button.callback(
                 format("%s - %s", plan.name, intl.format(plan.price.amount)),
-                format("couponChoice_%s|%s", plan.id, "vip-signal")
+                format("couponChoice_%s|%s", plan.id, "vip-signal"),
               );
             }),
-            2
+            2,
           ),
           [Markup.button.callback("Main Menu", "mainmenu")],
         ]).reply_markup,
-      }
+      },
     );
   });
 };

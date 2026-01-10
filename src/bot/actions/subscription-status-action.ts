@@ -1,6 +1,6 @@
 import moment from "moment";
 import { readFileSync } from "fs";
-import { Markup, Telegraf } from "telegraf";
+import { Markup, type Telegraf } from "telegraf";
 
 import { db } from "../../instances";
 import { getEnv } from "../../env";
@@ -20,7 +20,7 @@ export const subscriptionStatusAction = (bot: Telegraf) => {
     const [subscription] = await getLastSubscriptionByUserAndPlanType(
       db,
       context.user.id,
-      type
+      type,
     );
     if (subscription)
       return context.editMessageText(
@@ -30,7 +30,7 @@ export const subscriptionStatusAction = (bot: Telegraf) => {
           .replace("%payment_type%", subscription.payment.type)
           .replace(
             "%expires_at%",
-            moment(subscription.expiresAt).format("MMMM Do, YYYY")
+            moment(subscription.expiresAt).format("MMMM Do, YYYY"),
           ),
         {
           parse_mode: "MarkdownV2",
@@ -38,7 +38,7 @@ export const subscriptionStatusAction = (bot: Telegraf) => {
             [
               Markup.button.url(
                 "💬 Contact Support",
-                getEnv("SUPPORT_CONTACT")
+                getEnv("SUPPORT_CONTACT"),
               ),
             ],
             [
@@ -46,7 +46,7 @@ export const subscriptionStatusAction = (bot: Telegraf) => {
               Markup.button.callback("Main Menu", "main-menu"),
             ],
           ]).reply_markup,
-        }
+        },
       );
     else return context.reply("No subscription found.");
   });

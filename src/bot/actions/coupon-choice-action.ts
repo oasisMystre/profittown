@@ -1,4 +1,4 @@
-import { Markup, Telegraf } from "telegraf";
+import { Markup, type Telegraf } from "telegraf";
 import { format } from "../../utils/format";
 import { readFileSync } from "fs";
 
@@ -20,21 +20,21 @@ export const couponChoiceAction = (bot: Telegraf) => {
             [
               Markup.button.callback(
                 "Yes, I have a coupon",
-                format("couponScene_%s|%s", id, data)
+                format("couponScene_%s|%s", id, data),
               ),
             ],
             [
               Markup.button.callback(
                 "No, proceed with payment",
-                format("plan_%s|%s", id, data)
+                format("plan_%s|%s", id, data),
               ),
             ],
             [
-              Markup.button.callback("Go back", previousCommand.join('|')),
+              Markup.button.callback("Go back", previousCommand.join("|")),
               Markup.button.callback("Main Menu", "mainmenu"),
             ],
           ]).reply_markup,
-        }
+        },
       );
     }
   });

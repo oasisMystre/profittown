@@ -11,17 +11,19 @@ export const planAction = (bot: Telegraf) => {
       context.callbackQuery && "data" in context.callbackQuery
         ? context.callbackQuery.data
         : undefined;
-
     if (data) {
       const [newCommand, ...previousCommand] = data.split(/\|/g);
       const [, id] = newCommand.split(/_/);
 
       const plan = await getPlansById(db, Number(id));
       const buttons = [];
+      const extra = [];
 
+      if (plan.paymentLink)
+        extra.push([Markup.button.url("Pay with paystack", plan.paymentLink)]);
       if (previousCommand)
         buttons.push(
-          Markup.button.callback("Go Back", previousCommand.join("|"))
+          Markup.button.callback("Go Back", previousCommand.join("|")),
         );
       buttons.push(Markup.button.callback("Main Menu", "mainmenu"));
 
@@ -46,19 +48,19 @@ export const planAction = (bot: Telegraf) => {
                     format(
                       "%s Applied %s% Discount",
                       coupon.code,
-                      Number(coupon.discount) * 100
-                    )
+                      Number(coupon.discount) * 100,
+                    ),
                   )
-                : "No coupon applied"
+                : "No coupon applied",
             )
             .replace("%amount%", cleanText(intl.format(amount)))
             .replace(
               "%duration%",
-              cleanText(plan.recurring ? plan.recurring : "Lifetime")
+              cleanText(plan.recurring ? plan.recurring : "Lifetime"),
             )
             .replace(
               "%local_currency%",
-              format("N%s", cleanText((amount * rate).toLocaleString()))
+              format("N%s", cleanText((amount * rate).toLocaleString())),
             ),
           {
             parse_mode: "MarkdownV2",
@@ -66,23 +68,24 @@ export const planAction = (bot: Telegraf) => {
               [
                 Markup.button.callback(
                   "USDT",
-                  format("payment_%s_usdt|%s", id, data)
+                  format("payment_%s_usdt|%s", id, data),
                 ),
 
                 Markup.button.callback(
                   "BTC",
-                  format("payment_%s_btc|%s", id, data)
+                  format("payment_%s_btc|%s", id, data),
                 ),
               ],
               [
                 Markup.button.callback(
                   "Naira Payment",
-                  format("payment_%s_naira|%s", id, data)
+                  format("payment_%s_naira|%s", id, data),
                 ),
               ],
+              ...extra,
               buttons,
             ]).reply_markup,
-          }
+          },
         );
       }
     }

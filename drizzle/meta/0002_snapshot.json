@@ -1,6 +1,6 @@
 {
-  "id": "75a89dd4-0fcc-49fb-815f-17403733b97a",
-  "prevId": "a89f79c3-cf5e-4ff6-9f32-169d68dada08",
+  "id": "aba197b3-758a-4911-bff1-bba677ac09d0",
+  "prevId": "75a89dd4-0fcc-49fb-815f-17403733b97a",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -60,6 +60,12 @@
         },
         "recurring": {
           "name": "recurring",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "paymentLink": {
+          "name": "paymentLink",
           "type": "text",
           "primaryKey": false,
           "notNull": false

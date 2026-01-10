@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import { Markup, Telegraf } from "telegraf";
+import { Markup, type Telegraf } from "telegraf";
 
 import { getEnv } from "../../env";
 
@@ -16,7 +16,7 @@ export const howItWorksAction = (bot: Telegraf) => {
             Markup.button.callback("Main Menu", "mainmenu"),
           ],
         ]).reply_markup,
-      }
-    )
+      },
+    ),
   );
 };

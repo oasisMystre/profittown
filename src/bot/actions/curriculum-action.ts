@@ -11,7 +11,7 @@ export const curriculumAction = (bot: Telegraf) => {
           [
             Markup.button.callback(
               "📥 Dowload Curriculum",
-              "download_curriculum"
+              "download_curriculum",
             ),
           ],
           [
@@ -19,7 +19,7 @@ export const curriculumAction = (bot: Telegraf) => {
             Markup.button.callback("Main Menu", "mainmenu"),
           ],
         ]).reply_markup,
-      }
+      },
     );
   });
 };

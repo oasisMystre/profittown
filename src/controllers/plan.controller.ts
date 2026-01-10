@@ -1,14 +1,14 @@
 import type { z } from "zod";
 
-import { and, eq, SQL } from "drizzle-orm";
-import { Database } from "../db";
+import { and, eq, type SQL } from "drizzle-orm";
+import type { Database } from "../db";
 import { plans } from "../db/schema";
-import { selectPlanSchema } from "../db/zod";
+import type { selectPlanSchema } from "../db/zod";
 
 export const getPlansByType = (
   db: Database,
   type: z.infer<typeof selectPlanSchema>["type"],
-  where?: SQL
+  where?: SQL,
 ) =>
   db.query.plans
     .findMany({
@@ -18,11 +18,10 @@ export const getPlansByType = (
 
 export const getPlansById = (
   db: Database,
-  id: z.infer<typeof selectPlanSchema>["id"]
+  id: z.infer<typeof selectPlanSchema>["id"],
 ) =>
   db.query.plans
     .findFirst({
       where: eq(plans.id, id),
     })
     .execute();
-

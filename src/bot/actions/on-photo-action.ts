@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { Input, Markup } from "telegraf";
-import { Telegraf } from "telegraf";
+import type { Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
 
 import { getEnv } from "../../env";
@@ -46,39 +46,39 @@ export const onPhotoAction = (bot: Telegraf) => {
                       ? format(
                           "%s applied %s% discount",
                           subscription.payment.coupon.code,
-                          Number(subscription.payment.coupon.discount) * 100
+                          Number(subscription.payment.coupon.discount) * 100,
                         )
-                      : "No coupon applied"
+                      : "No coupon applied",
                   )
                   .replace(
                     "%subscription_id%",
-                    cleanText(String(subscription.id))
+                    cleanText(String(subscription.id)),
                   )
                   .replace("%payment_type%", cleanText(payment.type))
                   .replace(
                     "%amount%",
-                    cleanText(intl.format(payment.plan.price.amount))
+                    cleanText(intl.format(payment.plan.price.amount)),
                   )
                   .replace(
                     "%local_amount%",
-                    format("N%s", cleanText(localAmount.toLocaleString()))
+                    format("N%s", cleanText(localAmount.toLocaleString())),
                   ),
                 reply_markup: Markup.inlineKeyboard([
                   Markup.button.callback(
                     "Approve",
-                    format("approve-%s", subscription.id)
+                    format("approve-%s", subscription.id),
                   ),
                 ]).reply_markup,
-              }
+              },
             ),
             context.replyWithMarkdownV2(
               readFileSync(
                 "locale/en/payments/pending-payment.md",
-                "utf-8"
+                "utf-8",
               ).replace("%subscriptionId%", String(subscription.id)),
               Markup.inlineKeyboard([
                 Markup.button.url("Contact Support", getEnv("SUPPORT_CONTACT")),
-              ])
+              ]),
             ),
           ]);
       }

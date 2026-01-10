@@ -16,6 +16,7 @@ export const plans = pgTable(
     recurring: text({
       enum: ["monthly", "quarterly", "semi-annually", "annually"],
     }),
+    paymentLink: text(),
     price: jsonb()
       .$type<{ amount: number; currency: "USD" | "NGN" }>()
       .notNull(),
@@ -23,5 +24,5 @@ export const plans = pgTable(
   },
   (column) => ({
     uniquePlan: unique().on(column.name, column.price, column.type),
-  })
+  }),
 );

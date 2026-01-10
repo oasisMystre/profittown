@@ -1,4 +1,4 @@
-import { Telegraf } from "telegraf";
+import type { Telegraf } from "telegraf";
 import { approvePaymentCommand } from "./approve-payment-command";
 
 export const registerCommands = (bot: Telegraf) => {

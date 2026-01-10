@@ -7,7 +7,7 @@ import type { insertUserSchema, selectUserSchema } from "../db/zod";
 
 export const createUser = async (
   db: Database,
-  value: z.infer<typeof insertUserSchema>
+  value: z.infer<typeof insertUserSchema>,
 ) => {
   const [user] = await db
     .insert(users)
@@ -22,5 +22,5 @@ export const createUser = async (
 export const updateUserById = (
   db: Database,
   id: z.infer<typeof selectUserSchema>["id"],
-  value: Partial<z.infer<typeof insertUserSchema>>
+  value: Partial<z.infer<typeof insertUserSchema>>,
 ) => db.update(users).set(value).where(eq(users.id, id)).returning().execute();

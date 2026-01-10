@@ -22,7 +22,7 @@ export const startAction = (telegraf: Telegraf) => {
             ? Markup.button.url(name, data)
             : Markup.button.callback(name, data),
         ]),
-      ])
+      ]),
     );
   });
 
@@ -36,6 +36,6 @@ export const startAction = (telegraf: Telegraf) => {
             : Markup.button.callback(name, data),
         ]),
       ]).reply_markup,
-    })
+    }),
   );
 };

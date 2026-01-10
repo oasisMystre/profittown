@@ -15,8 +15,8 @@ function main() {
       envKeys
         .filter((key) => search.test(key))
         .map((key) => `"${key.replace(search, "")}"`)
-        .join("|")
-    )
+        .join("|"),
+    ),
   );
 }
 

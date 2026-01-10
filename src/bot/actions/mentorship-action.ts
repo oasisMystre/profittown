@@ -1,10 +1,10 @@
 import { chunk } from "lodash";
 import { readFileSync } from "fs";
-
 import { Markup, type Telegraf } from "telegraf";
-import { getPlansByType } from "../../controllers/plan.controller";
+
 import { db } from "../../instances";
 import { format } from "../../utils/format";
+import { getPlansByType } from "../../controllers/plan.controller";
 
 export const mentorshipAction = (telegraf: Telegraf) => {
   telegraf.action("mentorship", async (context) => {
@@ -18,7 +18,7 @@ export const mentorshipAction = (telegraf: Telegraf) => {
           [
             Markup.button.callback(
               "Check Subscription Status",
-              "subscription-status_oneoff"
+              "subscription-status_oneoff",
             ),
           ],
           ...chunk(
@@ -29,15 +29,15 @@ export const mentorshipAction = (telegraf: Telegraf) => {
               });
               return Markup.button.callback(
                 format("%s - %s", plan.name, intl.format(plan.price.amount)),
-                format("couponChoice_%s|%s", plan.id, "mentorship")
+                format("couponChoice_%s|%s", plan.id, "mentorship"),
               );
             }),
-            1
+            1,
           ),
           [Markup.button.callback("📚 Mentorship Curriculum", "curriculum")],
           [Markup.button.callback("Main Menu", "mainmenu")],
         ]).reply_markup,
-      }
+      },
     );
   });
 };

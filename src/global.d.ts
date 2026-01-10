@@ -27,6 +27,3 @@ declare module "telegraf" {
 declare global {
   const Zod: typeof z;
 }
-
-
-type X = Zod

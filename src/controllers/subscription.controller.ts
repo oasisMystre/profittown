@@ -12,7 +12,7 @@ import type {
 
 export const createSubscription = async (
   db: Database,
-  value: z.infer<typeof insertSubscriptionSchema>
+  value: z.infer<typeof insertSubscriptionSchema>,
 ) => {
   const [subscription] = await db
     .insert(subscriptions)
@@ -27,7 +27,7 @@ export const createSubscription = async (
 export const updateSubscriptionById = (
   db: Database,
   id: z.infer<typeof selectSubscriptionSchema>["id"],
-  value: Partial<z.infer<typeof insertSubscriptionSchema>>
+  value: Partial<z.infer<typeof insertSubscriptionSchema>>,
 ) =>
   db
     .update(subscriptions)
@@ -38,7 +38,7 @@ export const updateSubscriptionById = (
 
 export const getSubscriptionById = (
   db: Database,
-  id: z.infer<typeof selectSubscriptionSchema>["id"]
+  id: z.infer<typeof selectSubscriptionSchema>["id"],
 ) =>
   db.query.subscriptions
     .findFirst({
@@ -66,7 +66,7 @@ export const getSubscriptionById = (
 export const getLastSubscriptionByUserAndPlanType = (
   db: Database,
   user: z.infer<typeof selectUserSchema>["id"],
-  planType?: z.infer<typeof selectPlanSchema>["type"]
+  planType?: z.infer<typeof selectPlanSchema>["type"],
 ) => {
   return db
     .select({
@@ -77,14 +77,14 @@ export const getLastSubscriptionByUserAndPlanType = (
     .from(subscriptions)
     .innerJoin(
       payments,
-      and(eq(subscriptions.payment, payments.id), eq(payments.user, user))
+      and(eq(subscriptions.payment, payments.id), eq(payments.user, user)),
     )
     .innerJoin(
       plans,
       and(
         eq(payments.plan, plans.id),
-        planType ? eq(plans.type, planType) : undefined
-      )
+        planType ? eq(plans.type, planType) : undefined,
+      ),
     )
     .where(eq(subscriptions.status, "active"))
     .orderBy(desc(subscriptions.createdAt))
