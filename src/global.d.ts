@@ -1,3 +1,4 @@
+/**  biome-ignore-all lint/correctness/noUnusedImports: global types inferred **/
 import type { z } from "zod";
 import type { Context, Scenes } from "telegraf";
 

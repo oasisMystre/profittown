@@ -14,10 +14,12 @@ import {
 
 export const onPhotoAction = (bot: Telegraf) => {
   bot.on(message("photo"), async (context) => {
+    console.log("photo", "fuckkkk");
     const photos = context.message.photo;
 
     for (const photo of photos) {
       const payment = await getLastPaymentByUser(db, context.user.id);
+      console.log(payment);
       if (payment) {
         const intl = Intl.NumberFormat("en-US", {
           style: "currency",

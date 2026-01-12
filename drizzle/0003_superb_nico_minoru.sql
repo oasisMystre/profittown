@@ -1,0 +1,1 @@
+ALTER TABLE "payments" ADD CONSTRAINT "payments_user_coupon_plan_type_status_unique" UNIQUE NULLS NOT DISTINCT("user","coupon","plan","type","status");
