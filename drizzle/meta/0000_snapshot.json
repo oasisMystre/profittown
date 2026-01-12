@@ -1,5 +1,5 @@
 {
-  "id": "a89f79c3-cf5e-4ff6-9f32-169d68dada08",
+  "id": "7afac01a-619a-4f9c-ae0d-a0fafb66dc7d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -64,6 +64,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "paymentLink": {
+          "name": "paymentLink",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
         "price": {
           "name": "price",
           "type": "jsonb",
@@ -85,7 +91,11 @@
         "plans_name_price_type_unique": {
           "name": "plans_name_price_type_unique",
           "nullsNotDistinct": false,
-          "columns": ["name", "price", "type"]
+          "columns": [
+            "name",
+            "price",
+            "type"
+          ]
         }
       },
       "policies": {},
@@ -135,7 +145,9 @@
         "coupons_code_unique": {
           "name": "coupons_code_unique",
           "nullsNotDistinct": false,
-          "columns": ["code"]
+          "columns": [
+            "code"
+          ]
         }
       },
       "policies": {},
@@ -203,8 +215,12 @@
           "name": "payments_user_users_id_fk",
           "tableFrom": "payments",
           "tableTo": "users",
-          "columnsFrom": ["user"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -212,8 +228,12 @@
           "name": "payments_plan_plans_id_fk",
           "tableFrom": "payments",
           "tableTo": "plans",
-          "columnsFrom": ["plan"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "plan"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -221,8 +241,12 @@
           "name": "payments_coupon_coupons_id_fk",
           "tableFrom": "payments",
           "tableTo": "coupons",
-          "columnsFrom": ["coupon"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "coupon"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -232,7 +256,13 @@
         "payments_user_coupon_plan_type_status_unique": {
           "name": "payments_user_coupon_plan_type_status_unique",
           "nullsNotDistinct": true,
-          "columns": ["user", "coupon", "plan", "type", "status"]
+          "columns": [
+            "user",
+            "coupon",
+            "plan",
+            "type",
+            "status"
+          ]
         }
       },
       "policies": {},
@@ -289,8 +319,12 @@
           "name": "subscriptions_payment_payments_id_fk",
           "tableFrom": "subscriptions",
           "tableTo": "payments",
-          "columnsFrom": ["payment"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "payment"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }

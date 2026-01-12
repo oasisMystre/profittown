@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1747605157495,
-      "tag": "0000_silent_pestilence",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1753202341997,
-      "tag": "0001_charming_nextwave",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1768037906727,
-      "tag": "0002_soft_cobalt_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1768226676105,
-      "tag": "0003_superb_nico_minoru",
+      "when": 1768227289800,
+      "tag": "0000_salty_mad_thinker",
       "breakpoints": true
     }
   ]

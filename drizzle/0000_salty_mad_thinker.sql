@@ -9,6 +9,7 @@ CREATE TABLE "plans" (
 	"name" text NOT NULL,
 	"type" text NOT NULL,
 	"recurring" text,
+	"paymentLink" text,
 	"price" jsonb NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "plans_name_price_type_unique" UNIQUE("name","price","type")
