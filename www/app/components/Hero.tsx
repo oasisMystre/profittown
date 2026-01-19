@@ -28,10 +28,10 @@ export function Hero() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <button className="inline-flex justify-center items-center px-8 py-4 text-lg font-bold rounded-2xl text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900 transition-all duration-300 transform hover:scale-105 shadow-xl shadow-purple-500/30">
+                            <a  href="https://t.me/profittownsynth" className="inline-flex justify-center items-center px-8 py-4 text-lg font-bold rounded-2xl text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900 transition-all duration-300 transform hover:scale-105 shadow-xl shadow-purple-500/30">
                                 Get Free Signals Now
                                 <ArrowRight className="ml-2 h-5 w-5" />
-                            </button>
+                            </a>
                         </div>
 
                         <div className="flex items-center gap-6 text-sm font-medium text-gray-500 dark:text-gray-400">

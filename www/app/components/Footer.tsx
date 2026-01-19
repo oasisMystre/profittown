@@ -7,13 +7,10 @@ export function Footer() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-4 gap-12 mb-12">
                     <div className="col-span-1 md:col-span-2">
-                        <div className="flex items-center gap-2 mb-6">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center">
-                                <span className="text-white font-bold text-xl">P</span>
-                            </div>
-                            <span className="font-bold text-xl tracking-tight text-gray-900 dark:text-white">
-                                ProfitTown
-                            </span>
+                        <div className="flex items-center gap-2 mb-6 max-h-16">
+                                                        <img src="/logo.png" alt="ProfitTown" className="w-48 h-48 " />
+
+                     
                         </div>
                         <p className="text-gray-500 dark:text-gray-400 max-w-sm mb-6">
                             Empowering traders with automated signals and copy trading technology. Success is just a copy away.

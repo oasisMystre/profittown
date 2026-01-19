@@ -10,12 +10,8 @@ export function Navbar() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
                     <div className="flex-shrink-0 flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center">
-                            <span className="text-white font-bold text-xl">P</span>
-                        </div>
-                        <span className="font-bold text-xl tracking-tight text-gray-900 dark:text-white">
-                            ProfitTown
-                        </span>
+                                                  <img src="/logo.png" alt="ProfitTown" className="w-64 h-64 " />
+
                     </div>
 
                     <div className="hidden md:flex items-center space-x-8">

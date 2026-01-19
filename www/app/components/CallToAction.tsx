@@ -21,10 +21,10 @@ export function CallToAction() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                            <button className="inline-flex justify-center items-center px-8 py-4 text-lg font-bold rounded-2xl text-purple-900 bg-white hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
+                            <a   href="https://t.me/profittownsynth" className="inline-flex justify-center items-center px-8 py-4 text-lg font-bold rounded-2xl text-purple-900 bg-white hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
                                 Join Free VIP Signals
                                 <ArrowRight className="ml-2 h-5 w-5" />
-                            </button>
+                            </a>
                         </div>
 
                         <p className="text-sm text-gray-400 mt-6">
