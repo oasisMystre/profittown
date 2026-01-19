@@ -50,11 +50,11 @@ export function Hero() {
                         <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900">
                             <div className="aspect-[4/3] relative bg-gray-100 dark:bg-gray-800 flex items-center justify-center group overflow-hidden">
                                 <img
-                                    src="https://images.unsplash.com/photo-1611974765270-ca1258634369?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                                    alt="Trading Dashboard"
-                                    className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-105"
+                                    src="/telegram-bot.png"
+                                    alt="Telegram Trading Bot Interface showing Buy Signal"
+                                    className="object-contain w-full h-full transform transition-transform duration-700 group-hover:scale-105 p-4"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent"></div>
 
                                 {/* Floating elements for dynamic feel */}
                                 <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white">
