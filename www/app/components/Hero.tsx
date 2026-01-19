@@ -52,7 +52,7 @@ export function Hero() {
                                 <img
                                     src="/telegram-bot.png"
                                     alt="Telegram Trading Bot Interface showing Buy Signal"
-                                    className="object-contain w-full h-full transform transition-transform duration-700 group-hover:scale-105 p-4"
+                                    className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent"></div>
 
@@ -71,7 +71,7 @@ export function Hero() {
                             </div>
                         </div>
                         {/* Decorative blobs behind image */}
-                        <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-purple-500/20 to-indigo-500/20 blur-3xl rounded-full"></div>
+                        <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-purple-500/10 to-indigo-500/10 blur-3xl rounded-full"></div>
                     </div>
                 </div>
             </div>
