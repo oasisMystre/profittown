@@ -1,5 +1,6 @@
 
-import { MessageCircle, Twitter, Instagram } from "lucide-react";
+import { Instagram } from "lucide-react";
+import logoImg from "../assets/images/logo.png";
 
 export function Footer() {
     return (
@@ -8,21 +9,21 @@ export function Footer() {
                 <div className="grid md:grid-cols-4 gap-12 mb-12">
                     <div className="col-span-1 md:col-span-2">
                         <div className="flex items-center gap-2 mb-6 max-h-16">
-                                                        <img src="/logo.png" alt="ProfitTown" className="w-48 h-48 " />
+                            <img src={logoImg} alt="ProfitTown" className="w-48 h-48 " />
 
-                     
+
                         </div>
                         <p className="text-gray-500 dark:text-gray-400 max-w-sm mb-6">
                             Empowering traders with automated signals and copy trading technology. Success is just a copy away.
                         </p>
                         <div className="flex gap-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-purple-100 hover:text-purple-600 dark:hover:bg-purple-900/30 dark:hover:text-purple-400 transition-colors">
+                            {/* <a href="#" className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-purple-100 hover:text-purple-600 dark:hover:bg-purple-900/30 dark:hover:text-purple-400 transition-colors">
                                 <MessageCircle size={20} />
                             </a>
                             <a href="#" className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-purple-100 hover:text-purple-600 dark:hover:bg-purple-900/30 dark:hover:text-purple-400 transition-colors">
                                 <Twitter size={20} />
-                            </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-purple-100 hover:text-purple-600 dark:hover:bg-purple-900/30 dark:hover:text-purple-400 transition-colors">
+                            </a> */}
+                            <a target="_blank" href="https://www.instagram.com/profit_town?igsh=MWo3NTdieXlkNDF2OA%3D%3D&utm_source=qr" className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-purple-100 hover:text-purple-600 dark:hover:bg-purple-900/30 dark:hover:text-purple-400 transition-colors">
                                 <Instagram size={20} />
                             </a>
                         </div>
@@ -52,7 +53,7 @@ export function Footer() {
                     <p className="text-gray-500 dark:text-gray-500 text-sm">
                         © 2025 ProfitTown. All rights reserved.
                     </p>
-                    <p className="text-gray-400 text-sm text-center md:text-right max-w-md">
+                    <p className="text-gray-400 text-sm text-center md:text-right max-w-lg">
                         Trading involves risk. Past performance is not indicative of future results.
                     </p>
                 </div>

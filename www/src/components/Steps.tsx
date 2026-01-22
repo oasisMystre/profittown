@@ -1,5 +1,8 @@
 
 import { MessageCircle, Bell, PieChart } from "lucide-react";
+import joinTelegramImg from "../assets/images/join-telegram.jpg";
+import followSignalsImg from "../assets/images/follow-signals.jpg";
+import copyTradesImg from "../assets/images/copy-trades.jpg";
 
 export function Steps() {
     const steps = [
@@ -8,21 +11,21 @@ export function Steps() {
             title: "Join the free Telegram",
             items: ["Tap the button", "Instant Access"],
             icon: <MessageCircle size={32} />,
-            image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800"
+            image: joinTelegramImg
         },
         {
             id: "02",
             title: "Follow signals in realtime",
             items: ["Entries & Stop Loss", "Take Profit Targets"],
             icon: <Bell size={32} />,
-            image: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&q=80&w=800"
+            image: followSignalsImg
         },
         {
             id: "03",
             title: "Copy trades & Manage risk",
             items: ["Consistent Growth", "Risk Management"],
             icon: <PieChart size={32} />,
-            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800"
+            image: copyTradesImg
         }
     ];
 

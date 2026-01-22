@@ -54,6 +54,10 @@ Join the free Telegram
 [3] [Background Image]
 Copy trades & Manage risk 
 
+Section 
+Past Flips & Signals 
+[images]
+
 Call to action 
 Your Free Vip signals are waiting 
 [button]  Join Free VIP signals 

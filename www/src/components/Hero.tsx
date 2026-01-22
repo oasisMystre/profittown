@@ -1,5 +1,6 @@
 
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import telegramBotImg from "../assets/images/telegram-bot.png";
 
 export function Hero() {
     return (
@@ -28,7 +29,7 @@ export function Hero() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <a  href="https://t.me/profittownsynth" className="inline-flex justify-center items-center px-8 py-4 text-lg font-bold rounded-2xl text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900 transition-all duration-300 transform hover:scale-105 shadow-xl shadow-purple-500/30">
+                            <a target="_blank" href="https://t.me/profittownsynth" className="inline-flex justify-center items-center px-8 py-4 text-lg font-bold rounded-2xl text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900 transition-all duration-300 transform hover:scale-105 shadow-xl shadow-purple-500/30">
                                 Get Free Signals Now
                                 <ArrowRight className="ml-2 h-5 w-5" />
                             </a>
@@ -50,7 +51,7 @@ export function Hero() {
                         <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900">
                             <div className="aspect-[4/3] relative bg-gray-100 dark:bg-gray-800 flex items-center justify-center group overflow-hidden">
                                 <img
-                                    src="/telegram-bot.png"
+                                    src={telegramBotImg}
                                     alt="Telegram Trading Bot Interface showing Buy Signal"
                                     className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-105"
                                 />
